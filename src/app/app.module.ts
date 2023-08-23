@@ -41,6 +41,7 @@ import { UsebioComponent } from './game-master/use-bio/usebio.component';
 // Custom Modules
 import { DirectorsModule } from './directors/directors.module';
 import { PasswordResetComponent } from './directors/password-reset/password-reset.component';
+import { ExtendedSignupComponent } from './extended-signup/extended-signup.component';
 
 @NgModule({
 	declarations: [
@@ -66,6 +67,7 @@ import { PasswordResetComponent } from './directors/password-reset/password-rese
 		UsebioComponent,
 		SuccessDialogComponent,
 		PasswordResetComponent,
+		ExtendedSignupComponent
 	],
 	imports: [
 		BrowserModule,
@@ -86,7 +88,7 @@ import { PasswordResetComponent } from './directors/password-reset/password-rese
 		BrowserAnimationsModule,
 		MatDialogModule,
 		// Custom modules
-		DirectorsModule
+		DirectorsModule,
 	],
 
 	providers: [

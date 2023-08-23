@@ -15,6 +15,8 @@ import { UsersService } from 'src/app/services/account/users.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { DialogComponent } from 'src/app/general-components/dialog/dialog.component';
+import { countries } from 'src/app/shared/country-data-store';
+import { Country } from 'src/app/shared/countryModel';
 
 export interface DialogData {
 	type: string;
@@ -49,6 +51,10 @@ export class LoginSignupDialogComponent implements OnInit {
 	hide = true;
 	loginType: string;
 	private isDialogOpen: boolean = false;
+	dialingCodeValue?: any;
+
+	selectedCountry?: Country;
+	disabledDialingCode = true
 
 	private matchValidator(controlValidationName: string): ValidatorFn {
 		return (control: AbstractControl) => {
@@ -61,6 +67,7 @@ export class LoginSignupDialogComponent implements OnInit {
 				: null;
 		};
 	}
+	public countries: Country[] = countries;
 
 	constructor(
 		public dialogRef: MatDialogRef<LoginSignupDialogComponent>,
@@ -83,6 +90,16 @@ export class LoginSignupDialogComponent implements OnInit {
 				this.openDialog('Password Incorrect');
 			}
 		});
+		this.signUpForm
+			.get('country')
+			.valueChanges.subscribe((selectedCountry: string) => {
+				const matchedCountry = this.countries.find(
+					country => country.name === selectedCountry
+				);
+				if (matchedCountry) {
+					this.signUpForm.get('dialingCode').setValue(matchedCountry.number);
+				}
+			});
 	}
 
 	openDialog(message: string) {
@@ -128,12 +145,20 @@ export class LoginSignupDialogComponent implements OnInit {
 		password: ['', [Validators.required, Validators.minLength(4)]],
 		password_confirm: ['', [Validators.required, this.matchValidator('password')]],
 		country: ['', [Validators.required]],
-		slot: ['', [Validators.pattern('^[a-zA-Z0-9]*$')]]
+		slot: ['', [Validators.pattern('^[a-zA-Z0-9]*$')]],
+		dialingCode: ['']
 	});
+
+	
 	matcher = new MyErrorStateMatcher();
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
+
+	// getDialingCode() {
+	// 	const selectedCountry = this.signUpForm.get('country').value;
+	// }
+
 	submitForm() {
 		console.log('checking submit form...');
 		if (this.data.type === 'login') {
@@ -166,6 +191,19 @@ export class LoginSignupDialogComponent implements OnInit {
 			}
 		} else {
 			if (this.signUpForm.valid) {
+				const selectedCountryCode = this.signUpForm.get('country').value;
+				const selectedCountry = this.countries.find(
+					country => country.number === selectedCountryCode
+				);
+				// if (selectedCountry) {
+				// 	const dialingCode = selectedCountry.number;
+				// 	const phoneNumber = this.signUpForm.get('tel_phone').value;
+
+				// 	if (!phoneNumber.startsWith(dialingCode)) {
+				// 		const fullNumber = `${dialingCode}${phoneNumber}`;
+				// 		this.signUpForm.get('tel_phone').setValue(fullNumber);
+				// 	}
+				// }
 				this.authService.createUser(this.signUpForm);
 				this.dialogRef.close();
 			} else {

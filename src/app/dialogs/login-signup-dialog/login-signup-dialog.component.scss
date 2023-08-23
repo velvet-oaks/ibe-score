@@ -2,10 +2,98 @@ h1 {
 	text-align: center;
 }
 
-mat-form-field{
-	width: 40%;
-	margin-left:5%;
+form.sign-up {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 1em;
+	margin: 0
 }
-button{
+
+form.sign-up mat-form-field {
+	width: 100%;
+	margin: auto;
+}
+
+mat-form-field {
+	width: 40%;
+	margin-left: 5%;
+}
+
+#telephoneFieldWrapper.mat-tel-field .mdc-form-field-flex>div {
+	position: relative;
+	display: flex !important;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
 	width: 45%;
 }
+
+.mat-mdc-dialog-content {
+	max-height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input.tel-field {
+	// position: absolute;
+	// top: 0px;
+	// left: 80px;
+	// width: 80%;
+	width: 100%
+}
+
+input.dialing-code {
+	// position: absolute;
+	// top: 0px;
+	// left: 0;
+	// height: 1em;
+	// width: 20%;
+	width: 2em;
+	// border: 1px solid red;
+}
+
+label {
+	font-size: 12px;
+	align-items: stretch;
+	gap: 4px;
+	padding: 0.2rem 0.1rem;
+}
+
+label input {
+	height: 1.6rem;
+	font-size: 1rem;
+	border: unset;
+	background-color: whitesmoke;
+}
+
+.form-field-custom {
+	gap: 4px;
+	margin-bottom: 12px;
+}
+
+span.error-span {
+	color: #f44336
+}
+
+.dialcode-label {
+	width: 26%
+}
+
+.dialcode-label input {
+	width: 100%
+}
+
+.tel-label {
+	width: 74%
+}
+
+.tel-label input {
+	width: 96%
+}
+
+.login-dialog {}

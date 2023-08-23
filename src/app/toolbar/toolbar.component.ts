@@ -70,8 +70,10 @@ export class ToolbarComponent {
 	}
 
 	openDialog(type: any): void {
+		const width= type === 'signUp' ? '400px' : undefined
 		const dialogRef = this.dialog.open(LoginSignupDialogComponent, {
-			data: { type: type }
+			data: { type: type },
+			width: width
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
