@@ -1,0 +1,77 @@
+version: '3.7'
+
+networks:
+  web:
+    external: true
+  backend:
+    external: true
+
+
+services:
+  # ibe-frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: ibe-frontend:dev
+  #   restart: always
+  #   environment:
+  #     - NODE_ENV=development
+  #     - ENVIRONMENT=local
+  #   networks:
+  #     - web
+  #     - backend
+  #   labels:
+  #     - 'traefik.enable=true'
+  #     - 'traefik.http.routers.ibe-frontend.rule=Host(`localhost`) && Path(`/ibe`)'
+  #     - 'traefik.hhtp.routers.ibe-frontend.entrypoints=web'
+  #     - 'traefik.http.services.ibe-frontend.loadbalancer.server.port=80'
+  #   depends_on:
+  #     - ibe-backend
+  #   ports:
+  #     - '3000:80'
+  #   volumes:
+  #     - './nginx.conf:/etc/nginx/nginx.conf'
+  #   command: ['nginx', '-g', 'daemon off;']
+
+  reverse-proxy:
+    image: traefik:latest
+    command:
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--entrypoints.web.address-:80'
+      - '--api.insecure=true'
+      - '--log.level=DEBUG'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - './traefik.toml:/traefik.toml:ro'
+
+  ibe-backend:
+    image: backend-image
+    container_name: ibe-backend
+    hostname: ibe-backend
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+      - web
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - './backend/.env'
+    volumes:
+      - './backend/data:/data:rw'
+      - './src/src:/backend/src'
+      - './backend/keys:/backend/keys:ro'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.ibe-backend.rule=Host(`localhost`)&& PathPrefix(`/brian_app/api`)'
+      - 'traefik.services.loadbalancer.server.port=3000'
+      - 'traefik.docker.network=backend'
+

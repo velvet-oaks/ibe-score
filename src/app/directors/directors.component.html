@@ -1,0 +1,111 @@
+<div class="slot-tab">
+	<!-- <div class="slotForm">
+		<mat-card>
+			<h3>Add slot code to account</h3>
+			<mat-form-field>
+				<mat-label>Add Slot Account Code</mat-label>
+				<input
+					matInput
+					[(ngModel)]="generatedSlot" />
+			</mat-form-field>
+			<h3>Or Generate random slot Code</h3>
+			<button mat-button>Go</button>
+		</mat-card>
+	</div> -->
+	<!-- Email Update -->
+	<!-- <div class="slotForm emailpass"> -->
+	<mat-card>
+		<h3>Change Email:</h3>
+		<mat-form-field class="example-full-width">
+			<mat-label>Email</mat-label>
+			<input
+				matInput
+				placeholder="New Email"
+				[(ngModel)]="newEmail"
+				value="test@test.com" />
+		</mat-form-field>
+		&nbsp;
+		<button
+			mat-raised-button
+			color="none"
+			(click)="updateEmail()">
+			Save
+		</button>
+	</mat-card>
+	<!-- </div> -->
+
+	<mat-card class="email-pass">
+		<form [formGroup]="passwordUpdateForm">
+			<h3>Change Password</h3>
+			<mat-form-field class="example-full-width">
+				<mat-label>Current Password</mat-label>
+				<input
+					matInput
+					placeholder="Current Password"
+					formControlName="currentPassword"
+					[type]="hide ? 'password' : 'text'" />
+				<mat-icon
+					matSuffix
+					(click)="hide = !hide">
+					{{ hide ? 'visibility_off' : 'visibility' }}
+				</mat-icon>
+				<mat-error
+					*ngIf="passwordUpdateForm.get('currentPassword')?.errors?.required"
+					>Current Password is required.</mat-error
+				>
+			</mat-form-field>
+			<br />
+			<mat-form-field class="example-full-width">
+				<mat-label>New Password</mat-label>
+				<input
+					matInput
+					placeholder="New Password"
+					formControlName="newPassword"
+					[errorStateMatcher]="matcher"
+					[type]="hide ? 'password' : 'text'" />
+				<mat-icon
+					matSuffix
+					(click)="hide = !hide">
+					{{ hide ? 'visibility_off' : 'visibility' }}
+				</mat-icon>
+				<mat-error *ngIf="passwordUpdateForm.get('newPassword')?.errors?.required"
+					>New Password is required.</mat-error
+				>
+				<mat-error *ngIf="passwordUpdateForm.get('newPassword')?.errors?.minlength">
+					New Password must be at least 4 characters long.
+				</mat-error>
+			</mat-form-field>
+			<br />
+			<mat-form-field class="example-full-width">
+				<mat-label>Repeat Password</mat-label>
+				<input
+					matInput
+					placeholder="Repeat Password"
+					formControlName="repeatPassword"
+					[errorStateMatcher]="matcher"
+					[type]="hide ? 'password' : 'text'" />
+				<mat-icon
+					matSuffix
+					(click)="hide = !hide">
+					{{ hide ? 'visibility_off' : 'visibility' }}
+				</mat-icon>
+				<mat-error
+					*ngIf="passwordUpdateForm.get('repeatPassword')?.errors?.required"
+					>Repeat Password is required.</mat-error
+				>
+				<mat-error *ngIf="passwordUpdateForm.hasError('matchValidator')"
+					>Passwords do not match.</mat-error
+				>
+			</mat-form-field>
+			<br />
+			<button
+				mat-raised-button
+				color="none"
+				(click)="updatePassword()">
+				Save
+			</button>
+			<br />
+		</form>
+	</mat-card>
+
+</div>

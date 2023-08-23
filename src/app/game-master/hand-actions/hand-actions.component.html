@@ -1,0 +1,66 @@
+<mat-card class="main-content">
+	<div class="top-section">
+		<div class="top-row-wrapper">
+			<h4 class="controlsLabel">Hand record actions:</h4>
+			<button
+				mat-raised-button
+				(click)="uploadGame()"
+				matTooltip="Upload a deal data file for analysis. (.dlm, .dup or .pbn format.)">
+				Upload New
+			</button>
+			<button
+				mat-raised-button
+				(click)="alert()">
+				Download Current
+			</button>
+			<button
+				mat-raised-button
+				(click)="deleteHand()"
+				matTooltip="Delete current uploaded deal file. No analysis will be available untill a new deal file is uploaded.">
+				Delete Current
+			</button>
+		</div>
+		<div class="button-wrapper hand-data"></div>
+		<div class="button-wrapper">
+			<h4 class="controlsLabel">Download</h4>
+			<button
+				mat-raised-button
+				(click)="openEBU()"
+				matTooltip="Download current game file as .pbn format">
+				Download Current (.pbn)
+			</button>
+			<button
+				mat-raised-button
+				(click)="openEBU()"
+				matTooltip="Create P2P file for upload to English Bridge Union (EBU) website">
+				EBU P2P
+			</button>
+		</div>
+		<!-- <div class="button-wrapper">
+			<h4 class="controlsLabel">Upload</h4>
+			<button
+				mat-raised-button
+				(click)="openBBO()"
+				matTooltip="Upload multiple .html files as downloaded from the BBO website."
+			>
+				BBO
+			</button>
+		</div> -->
+	</div>
+	<!-- <div class="middle-section">
+		<div class="button-wrapper vertical">
+			<button class="test"></button>
+			<button class="test"></button>
+			<button class="test"></button>
+			<button class="test"></button>
+			<!-- <button
+				mat-raised-button
+				(click)="uploadGame()"
+				matTooltip="Upload a deal data file for analysis. (.dlm, .dup or .pbn format.)"
+			>
+				Upload New
+			</button> -->
+	<!-- </div> -->
+	<div class="output"></div>
+	<!-- </div> -->
+</mat-card>

@@ -1,0 +1,52 @@
+.main-content {
+	height: calc(100% - 64px);
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgb(205, 0, 129);
+	background: linear-gradient(
+		90deg,
+		rgba(205, 0, 129, 1) 0%,
+		rgba(189, 0, 205, 1) 100%
+	);
+}
+.glass-card {
+	position: relative;
+	bottom: 10%;
+	width: fit-content;
+	padding: 2em;
+	height: 20vh;
+	// border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.22);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	color: #d1d1d1;
+}
+
+.glass-card {
+	background: rgba(60, 177, 255, 0.27);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10.7px);
+	-webkit-backdrop-filter: blur(10.7px);
+	border: 1px solid rgba(60, 177, 255, 0.43);
+}
+
+h1 {
+	font-size: 36px;
+	font-weight: 400;
+	// -webkit-font-smoothing: antialiased;
+}
+
+mat-icon {
+	position: relative;
+	top: 6px
+}

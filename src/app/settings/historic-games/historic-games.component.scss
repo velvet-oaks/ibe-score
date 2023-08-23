@@ -1,0 +1,37 @@
+.mat-column-item {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+  color: white;
+
+}
+.mdc-data-table__cell  {
+  color: lightgray;
+  border-bottom: 1px solid currentColor;
+}
+.mdc-data-table__header-cell{
+  color: white;
+}
+.mdc-data-table__table{
+  min-width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  background: unset;
+  height: 20px;
+
+}
+.scroll {
+  height: 800px;
+  overflow-y:scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

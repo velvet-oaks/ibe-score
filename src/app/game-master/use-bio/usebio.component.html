@@ -1,0 +1,69 @@
+<div class="pairs-tab">
+	<mat-card>
+		<div class="container">
+			<div class="upload-column">
+				<h3>Drag your USEBIO file into the box or select using the button below</h3>
+				<div class="upload-section">
+					<div
+						class="drag-box"
+						(drop)="handleFiles($event.dataTransfer.files)"
+						(dragover)="onDragOver($event)"
+						(dragleave)="onDragLeave($event)"
+						(mousedown)="triggerClick(fileInput)">
+						<h4>Selected File:</h4>
+
+						<ng-container
+							*ngIf="selectedFiles && selectedFiles.length; else noFilesTemplate">
+							<h4 *ngFor="let file of filesArray">{{ file?.name }}</h4>
+
+						</ng-container>
+						<ng-template #noFilesTemplate>
+							<h3>No File Selected</h3>
+						</ng-template>
+					</div>
+					<input
+						type="file"
+						class="file-upload-original"
+						#fileInput
+						(change)="onFileChangeOrDrop($event)" />
+					<button
+						mat-mini-fab
+						class="ibe-upload"
+						color="primary"
+						(click)="triggerClick(fileInput)">
+						<mat-icon>attach_file</mat-icon>
+					</button>
+					<button
+						*ngIf="filesSelected"
+						(click)="uploadFiles()">
+						<h3>Upload Files</h3>
+						<mat-icon>cloud_upload</mat-icon>
+					</button>
+					<div
+						*ngIf="uploading"
+						class="spinner-overl">
+						<mat-spinner diameter="48"></mat-spinner>
+					</div>
+					<div
+						*ngIf="uploaded && !showAlert"
+						class="success-icon-wrapper">
+						<mat-icon class="success-icon">done_all</mat-icon>
+						<h3>Successfully Uploaded BBO Digest</h3>
+					</div>
+					<div
+						*ngIf="showAlert"
+						class="alert-box"
+						[ngClass]="'alert-box ' + alertType">
+						{{ alertMessage }}
+						<button
+							mat-fab
+							extended
+							(click)="clickHideAlert()">
+							<mat-icon>close</mat-icon>close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</mat-card>
+</div>

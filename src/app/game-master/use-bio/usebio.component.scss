@@ -1,0 +1,118 @@
+.bbo-tab {
+	background: linear-gradient(90deg, rgb(205, 0, 129) 0%, rgb(189, 0, 205) 100%);
+}
+
+mat-card {
+	padding: 2vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	// background: rgba(0, 162, 167, 0.72);
+	// border-radius:0 0 16px 16px;
+	// backdrop-filter: blur(8.2px);
+	// -webkit-backdrop-filter: blur(8.2px);
+	// border: 1px solid rgba(0, 162, 167, 0.39);
+}
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+h3 {
+	text-align: center;
+}
+
+.file-upload-original {
+	display: none;
+}
+.drag-box {
+	min-width: 200px;
+	max-width: 80%;
+	min-height: 100px;
+	padding: 1em;
+	border: 2px dashed #cd0081;
+	text-align: center;
+	line-height: 1em;
+	cursor: pointer;
+}
+
+ol {
+	display: grid;
+	gap: 0.4em;
+	margin-right: 1em;
+}
+
+.drag-over {
+	border-color: #217ab9;
+	border-width: 3px;
+}
+.selected {
+	border-color: #2fae5c;
+	border-width: 3px;
+}
+
+.ibe-upload {
+	width: 60px;
+	height: 60px;
+	background-color: #cd0081;
+	color: white;
+}
+
+.upload-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.upload-section {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2em;
+}
+.success-icon-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.success-icon {
+	font-size: 48px;
+	color: rgb(205, 0, 129);
+}
+.alert-box {
+	/* common styles for all alert types */
+	width: 50%;
+	height: 50px;
+	position: relative;
+	bottom: 136px;
+	padding: 4rem;
+	border-radius: 16px;
+	backdrop-filter: blur(8.2px);
+	-webkit-backdrop-filter: blur(8.2px);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+}
+
+.success {
+	background-color: green;
+	background: rgba(27, 126, 67, 0.8);
+	border: 1px solid rgba(27, 126, 67, 0.3);
+}
+
+.info {
+	// background-color: blue;
+	background: rgba(200, 189, 29, 0.82);
+	border: 1px solid rgba(200, 189, 29, 0.33);
+}
+
+.error {
+	background: rgba(188, 53, 53, 0.82);
+	border: 1px solid rgba(188, 53, 53, 0.33);
+}
+

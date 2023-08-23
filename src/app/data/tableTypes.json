@@ -1,0 +1,30 @@
+{
+  "pairs":{
+    "ordered":true,
+    "per_side":2
+  },
+  "team_four":{
+    "ordered":true,
+    "per_side":4
+  },
+  "team_eight":{
+    "ordered":true,
+    "per_side":8
+  },
+  "team_sixteen":{
+    "ordered":true,
+    "per_side":16
+  },
+  "indiviual":{
+    "ordered":true,
+    "per_side":1
+  },
+  "swiss_pair":{
+    "ordered":false,
+    "per_side":2
+  },
+  "swiss_teams":{
+    "ordered":false,
+    "per_side":"variable"
+  }
+}

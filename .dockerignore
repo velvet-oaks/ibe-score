@@ -1,0 +1,14 @@
+node_modules
+
+backend
+
+.git
+.angular
+.vscode
+
+.gitignore
+
+.editorconfig
+.scratch.js
+
+._*

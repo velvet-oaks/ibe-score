@@ -1,0 +1,145 @@
+* {
+	color: lightgrey;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 20px;
+}
+
+.middle-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	gap: 40px;
+}
+
+.hands-analysed,
+.info-row {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.info-row {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.top-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.top-row-wrapper {
+	display: flex;
+	flex-direction: column;
+	color: lightgrey;
+	gap: 6px;
+	margin-top: 3%;
+}
+
+
+
+.button-wrapper {
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	gap: 20px
+}
+
+.hand-section {
+	width: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 60px
+}
+
+.tricks {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+}
+
+table {
+			border:2px solid #ffcc00;
+			border-collapse:collapse;
+			padding:5px;
+}
+
+table th {
+			border:2px solid #ffcc00;
+			padding:5px;
+			background: #f0f0f0;
+			color: #313030;
+}
+table td {
+			border:2px solid #ffcc00;
+			text-align:center;
+			padding:5px;
+			background: #ffffff;
+			color: #313030;
+}
+
+
+.hand-notice {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.left-hand, .right-hand, .top-suits {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #ffcc00
+}
+
+.left-hand span,
+.right-hand span,
+.top-suits span {
+	color: inherit;
+}
+
+.navigation {
+	width: 100%;
+	font-size: 36px;
+	font-weight: 700;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.suit-score {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+}

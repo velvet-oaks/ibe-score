@@ -1,0 +1,26 @@
+mat-card{
+    padding: 1vh;
+}
+button{
+    width: 50%;
+    margin-left: auto;
+}
+.file-upload-original {
+    display: none
+}
+
+.upload-wrapper {
+    width: 50%
+}
+
+.ibe-upload {
+    width: 40px;
+    background-color: #CD0081
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

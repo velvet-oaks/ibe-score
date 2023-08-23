@@ -1,0 +1,422 @@
+[
+  {
+    "name": "Patsy Bloom",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "79,65,239,72,148,164,164,164,109,109,109,229,87,109,55" },
+    "_type": "player",
+    "_n": "54",
+    "_adddate": "13/05/18",
+    "_id": "BuvzIPP1679311297119"
+  },
+  {
+    "name": "Nicole Barclay",
+    "lastplay": { "_date": "07/10/22" },
+    "pp": { "_n": "3170,3170,3170,3170,3151,373,59,373,300,283,54" },
+    "_type": "player",
+    "_n": "55",
+    "_adddate": "13/05/18",
+    "_id": "CZmNdh21679311297119"
+  },
+  {
+    "name": "Stephanie Brahams",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "66,66,78,317,239,93,93,93,93,93,93,93,93,93,66,57" },
+    "_type": "player",
+    "_n": "56",
+    "_adddate": "13/05/18",
+    "_id": "S4Cvlrn1679311297119"
+  },
+  {
+    "name": "Michael Brahams",
+    "lastplay": { "_date": "14/11/19" },
+    "pp": { "_n": "151,68,68,68,56" },
+    "_type": "player",
+    "_n": "57",
+    "_adddate": "13/05/18",
+    "_id": "v0eYj1r1679311297119"
+  },
+  {
+    "name": "Michael Gee",
+    "lastplay": { "_date": "13/05/18" },
+    "pp": { "_n": "59" },
+    "_type": "player",
+    "_n": "58",
+    "_adddate": "13/05/18",
+    "_id": "YWduZpS1679311297119"
+  },
+  {
+    "name": "Jackie Gee",
+    "lastplay": { "_date": "31/03/22" },
+    "pp": {
+      "_n": "3158,3158,3158,69,69,55,69,69,69,69,69,69,69,69,69,185,69,97,97,69,58"
+    },
+    "_type": "player",
+    "_n": "59",
+    "_adddate": "13/05/18",
+    "_id": "JWmIQXq1679311297119"
+  },
+  {
+    "name": "Sandra Myers",
+    "lastplay": { "_date": "14/11/19" },
+    "pp": { "_n": "188,188,188,65,65,65,108,101,61" },
+    "_type": "player",
+    "_n": "60",
+    "_adddate": "13/05/18",
+    "_id": "yBnNtie1679311297119"
+  },
+  {
+    "name": "Pat Brand",
+    "lastplay": { "_date": "27/08/19" },
+    "pp": { "_n": "237,237,237,101,82,60" },
+    "_type": "player",
+    "_n": "61",
+    "_adddate": "13/05/18",
+    "_id": "YWLIyAY1679311297119"
+  },
+  {
+    "name": "Wendy Alper",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "97,97,99,99,99,99,63,63,63,63,66,76,66,63" },
+    "_type": "player",
+    "_n": "62",
+    "_adddate": "13/05/18",
+    "_id": "v8c7IDC1679311297119"
+  },
+  {
+    "name": "Jeffrey Alper",
+    "lastplay": { "_date": "27/08/19" },
+    "pp": { "_n": "62" },
+    "_type": "player",
+    "_n": "63",
+    "_adddate": "13/05/18",
+    "_id": "33BPb521679311297119"
+  },
+  {
+    "name": "Norman Tarn",
+    "lastplay": { "_date": "21/01/20" },
+    "pp": { "_n": "100,65" },
+    "_type": "player",
+    "_n": "64",
+    "_adddate": "13/05/18",
+    "_id": "TgtAop31679311297119"
+  },
+  {
+    "name": "Ghita Tarn",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "101,54,66,101,101,101,101,60,60,60,76,64,101,64" },
+    "_type": "player",
+    "_n": "65",
+    "_adddate": "13/05/18",
+    "_id": "MSiTzq51679311297119"
+  },
+  {
+    "name": "Loretta Burns",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "56,56,65,97,93,82,82,82,67,67,67,62,101,62,56,67" },
+    "_type": "player",
+    "_n": "66",
+    "_adddate": "13/05/18",
+    "_id": "YH0YodY1679311297119"
+  },
+  {
+    "name": "Robin Burns",
+    "lastplay": { "_date": "27/08/19" },
+    "pp": { "_n": "66,66,66,150,66" },
+    "_type": "player",
+    "_n": "67",
+    "_adddate": "13/05/18",
+    "_id": "02Upz4W1679311297119"
+  },
+  {
+    "name": "Nicholas Springer",
+    "lastplay": { "_date": "03/12/19" },
+    "pp": { "_n": "98,71,57,57,57,69" },
+    "_type": "player",
+    "_n": "68",
+    "_adddate": "13/05/18",
+    "_id": "Ex9W2dd1679311297119"
+  },
+  {
+    "name": "Ros Springer",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "59,59,59,305,59,59,59,59,59,59,59,59,59,59,68" },
+    "_type": "player",
+    "_n": "69",
+    "_adddate": "13/05/18",
+    "_id": "y8zxEU21679311297119"
+  },
+  {
+    "name": "Susan Bentata",
+    "lastplay": { "_date": "03/12/19" },
+    "pp": { "_n": "312" },
+    "_type": "player",
+    "_n": "70",
+    "_adddate": "19/10/18",
+    "_id": "SrvMk751679311297119"
+  },
+  {
+    "name": "Helen Sorrell",
+    "lastplay": { "_date": "21/01/20" },
+    "pp": { "_n": "105,68,97,97,97,236,236,236,109" },
+    "_type": "player",
+    "_n": "71",
+    "_adddate": "19/10/18",
+    "_id": "RcrMjAT1679311297119"
+  },
+  {
+    "name": "Sandra Hilton",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "407,384,54,238,238,238,144,144,151,76,96" },
+    "_type": "player",
+    "_n": "72",
+    "_adddate": "19/10/18",
+    "_id": "RCILxfz1679311297119"
+  },
+  {
+    "name": "Bev Fine",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "73",
+    "_adddate": "19/10/18",
+    "_id": "y1XEbTN1679311297119"
+  },
+  {
+    "name": "Ruth Smilg",
+    "lastplay": { "_date": "09/12/19" },
+    "pp": { "_n": "153" },
+    "_type": "player",
+    "_n": "74",
+    "_adddate": "19/10/18",
+    "_id": "hK1puX01679311297119"
+  },
+  {
+    "name": "Lita Young",
+    "lastplay": { "_date": "21/01/20" },
+    "pp": { "_n": "98,315,79,90" },
+    "_type": "player",
+    "_n": "75",
+    "_adddate": "19/10/18",
+    "_id": "RuPknZv1679311297119"
+  },
+  {
+    "name": "Joan Fobel",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "82,105,98,98,98,65,186,133,62,72" },
+    "_type": "player",
+    "_n": "76",
+    "_adddate": "19/10/18",
+    "_id": "SNH6nwE1679311297119"
+  },
+  {
+    "name": "Frances Kirsh",
+    "lastplay": { "_date": "05/03/19" },
+    "pp": { "_n": "78" },
+    "_type": "player",
+    "_n": "77",
+    "_adddate": "19/10/18",
+    "_id": "ZGbNTKN1679311297119"
+  },
+  {
+    "name": "Marcia Green",
+    "lastplay": { "_date": "09/12/19" },
+    "pp": { "_n": "56,195,195,195,200,77" },
+    "_type": "player",
+    "_n": "78",
+    "_adddate": "19/10/18",
+    "_id": "42z2lJp1679311297119"
+  },
+  {
+    "name": "Arlette Shamash",
+    "lastplay": { "_date": "02/02/23" },
+    "pp": {
+      "_n": "316,316,3128,54,98,316,304,195,151,151,151,75,165,148,96,97"
+    },
+    "_type": "player",
+    "_n": "79",
+    "_adddate": "19/10/18",
+    "_id": "HC0qjIF1679311297119"
+  },
+  {
+    "name": "Paula Marba",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "80",
+    "_adddate": "19/10/18",
+    "_id": "cBwq9Jq1679311297119"
+  },
+  {
+    "name": "Mousie Rubin",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "81",
+    "_adddate": "19/10/18",
+    "_id": "RQM6OrN1679311297119"
+  },
+  {
+    "name": "Irene Gee",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "76,66,66,66,101,143,95,61" },
+    "_type": "player",
+    "_n": "82",
+    "_adddate": "19/10/18",
+    "_id": "gbw5y7y1679311297119"
+  },
+  {
+    "name": "Jenifer Rosenberg",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "83",
+    "_adddate": "19/10/18",
+    "_id": "pRrg5z51679311297119"
+  },
+  {
+    "name": "Sheila Burnham",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "84",
+    "_adddate": "19/10/18",
+    "_id": "MlxCB6L1679311297119"
+  },
+  {
+    "name": "Susie James",
+    "lastplay": { "_date": "03/12/19" },
+    "pp": { "_n": "316,199" },
+    "_type": "player",
+    "_n": "85",
+    "_adddate": "19/10/18",
+    "_id": "ykmu2Av1679311297119"
+  },
+  {
+    "name": "Yvonne Gill",
+    "lastplay": { "_date": "21/01/20" },
+    "pp": { "_n": "90,311,152,152,152,238,238,238,98,152" },
+    "_type": "player",
+    "_n": "86",
+    "_adddate": "19/10/18",
+    "_id": "o5FTDNY1679311297119"
+  },
+  {
+    "name": "Moira Gershinson",
+    "lastplay": { "_date": "23/05/19" },
+    "pp": { "_n": "54,163" },
+    "_type": "player",
+    "_n": "87",
+    "_adddate": "19/10/18",
+    "_id": "t2MCeTi1679311297119"
+  },
+  {
+    "name": "Brenda Josephs",
+    "lastplay": { "_date": "02/02/23" },
+    "pp": { "_n": "261" },
+    "_type": "player",
+    "_n": "88",
+    "_adddate": "19/10/18",
+    "_id": "LDiMyw01679311297119"
+  },
+  {
+    "name": "Frankie Rubenstein",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "89",
+    "_adddate": "19/10/18",
+    "_id": "Lfcj2vu1679311297119"
+  },
+  {
+    "name": "Gill Fenner",
+    "lastplay": { "_date": "21/01/20" },
+    "pp": { "_n": "86,75" },
+    "_type": "player",
+    "_n": "90",
+    "_adddate": "19/10/18",
+    "_id": "sFbb3c11679311297119"
+  },
+  {
+    "name": "Tania Bader",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "91",
+    "_adddate": "19/10/18",
+    "_id": "RBtPVyR1679311297119"
+  },
+  {
+    "name": "Barbara Wallace",
+    "lastplay": { "_date": "" },
+    "_type": "player",
+    "_n": "92",
+    "_adddate": "19/10/18",
+    "_id": "oPfLNj81679311297119"
+  },
+  {
+    "name": "Maxine Libson",
+    "lastplay": { "_date": "14/11/19" },
+    "pp": { "_n": "66,56" },
+    "_type": "player",
+    "_n": "93",
+    "_adddate": "24/10/18",
+    "_id": "cP0TMTs1679311297119"
+  },
+  {
+    "name": "Sandra Stecker",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "95" },
+    "_type": "player",
+    "_n": "94",
+    "_adddate": "24/10/18",
+    "_id": "XiCQiPi1679311297119"
+  },
+  {
+    "name": "Sandra Granditer",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "94,94,151,94,100,100,100,109,94,94,82,94" },
+    "_type": "player",
+    "_n": "95",
+    "_adddate": "24/10/18",
+    "_id": "FwOIxDi1679311297119"
+  },
+  {
+    "name": "Colette Levy (french)",
+    "lastplay": { "_date": "15/02/20" },
+    "pp": { "_n": "100,164,98,79,72" },
+    "_type": "player",
+    "_n": "96",
+    "_adddate": "24/10/18",
+    "_id": "10Byjbt1679311297119"
+  },
+  {
+    "name": "Wendy Spencer",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "62,62,385,66,71,71,71,188,154,59,59,79" },
+    "_type": "player",
+    "_n": "97",
+    "_adddate": "24/10/18",
+    "_id": "c7c4Dhm1679311297119"
+  },
+  {
+    "name": "Vera Dallal",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "99,79,75,68,76,76,76,260,143,143,143,86,187,100,96,105" },
+    "_type": "player",
+    "_n": "98",
+    "_adddate": "24/10/18",
+    "_id": "ZIY9HY41679311297119"
+  },
+  {
+    "name": "Charlotte Newman",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "98,100,144,62,62,62,62,231,149,100" },
+    "_type": "player",
+    "_n": "99",
+    "_adddate": "24/10/18",
+    "_id": "fzAXgwh1679311297119"
+  },
+  {
+    "name": "Ora Rimouine",
+    "lastplay": { "_date": "27/02/20" },
+    "pp": { "_n": "109,99,96,64,109,109,109,95,95,95,98,99" },
+    "_type": "player",
+    "_n": "100",
+    "_adddate": "24/10/18",
+    "_id": "XggBf6s1679311297119"
+  }
+
+]

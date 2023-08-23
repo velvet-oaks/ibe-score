@@ -1,0 +1,27 @@
+{
+	"currentgamedata": {
+    "eventName":"Purley Championship Pairs",
+		"settingstxt": "MV PS517-2\r\nROVER false\r\nATT ATTACHEDTOTABLE\r\nPN NP\r\nEN Purley Championship Pairs\r\nASW .\r\nOTH 0.2.0.-1.-1.-1.1.0.1.1.1.1.0.10.30000.0.x.x.0.0.0.0.0.0.1.0.x.1.0.0.1.0.0.0.0.0.0.1.0.1.0.1.1.0.1.0.1.-1.0.-1.-1.-1.-1.-1.0.0.1.0.-1.-1.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x\r\nDUMMY\r\n",
+		"movementtxt": "All-plays-all Alternative\r\n2,8,30,2,15,0,-1\r\n1,9,1,1,16,2,1,15,3,1,14,4,1,13,5,1,12,6,1,11,7,1,10,8,3,6,9,4,7,10,5,1,11,6,2,12,7,3,13,1,4,14,2,5,15\r\n2,10,2,2,9,3,2,16,4,2,15,5,2,14,6,2,13,7,2,12,8,2,11,1,7,2,11,1,3,12,2,4,13,3,5,14,4,6,15,5,7,9,6,1,10\r\n3,11,3,3,10,4,3,9,5,3,16,6,3,15,7,3,14,8,3,13,1,3,12,2,5,4,12,6,5,13,7,6,14,1,7,15,2,1,9,3,2,10,4,3,11\r\n4,12,4,4,11,5,4,10,6,4,9,7,4,16,8,4,15,1,4,14,2,4,13,3,8,1,13,8,2,14,8,3,15,8,4,9,8,5,10,8,6,11,8,7,12\r\n5,13,6,5,12,7,5,11,8,5,10,1,5,9,2,5,16,3,5,15,4,5,14,5,11,14,9,12,15,10,13,9,11,14,10,12,15,11,13,9,12,14,10,13,15\r\n6,14,7,6,13,8,6,12,1,6,11,2,6,10,3,6,9,4,6,16,5,6,15,6,15,10,11,9,11,12,10,12,13,11,13,14,12,14,15,13,15,9,14,9,10\r\n7,15,8,7,14,1,7,13,2,7,12,3,7,11,4,7,10,5,7,9,6,7,16,7,13,12,12,14,13,13,15,14,14,9,15,15,10,9,9,11,10,10,12,11,11\r\n8,16,1,8,15,2,8,14,3,8,13,4,8,12,5,8,11,6,8,10,7,8,9,8,16,9,13,16,10,14,16,11,15,16,12,9,16,13,10,16,14,11,16,15,12\r\n",
+		"movedesctxt": "",
+		"namestxt": "Paul Dibbs & Mary Dibbs\r\nDonna Hess & Sonia Malik\r\nElaine Cann & Beryl Blizzard\r\nChris Briggs & Kei Miyakita\r\nSally Found & Paul Found\r\nJosie Dickson & Josie Silver\r\nChris Simmons & Graeme Monk\r\nMary Carmen Featherstone & Alan Featherstone\r\nLizzie Thakur & Nasim Hemani\r\nRichard Applebee & Mike Bottomley\r\nDavid Rothberg & Nick White\r\nCarol Letts & Bob McMahon\r\nLynda Morris & Peter Stretton\r\nSteve Goldman & Terry Mitchell\r\nSharon Walker & Alan Walker\r\nRoger Whittaker & Liz Whittaker\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\nTap here & Tap here\r\n",
+		"teamnamestxt": "",
+		"sidenamestxt": "",
+		"tablenamestxt": "",
+		"nrevtxt": "266\r\n",
+		"rrevtxt": "242\r\n",
+		"grevtxt": "156",
+		"paratxt": "",
+		"tagstxt": "",
+		"strattxt": "",
+		"sittxt": "",
+		"handitxt": "",
+		"gradjtxt": "",
+		"nkstxt": "",
+		"colstxt": "",
+		"rdtstxt": "",
+		"lunchtxt": "",
+		"bdresets": "",
+		"othfiles": ""
+	}
+}

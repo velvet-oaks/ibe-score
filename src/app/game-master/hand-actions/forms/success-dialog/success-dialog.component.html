@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Success</h1>
+<div mat-dialog-content>
+  <p>{{ message }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="{ continue: true, closeParent: false }">
+    Continue Uploading
+  </button>
+  <button mat-button [mat-dialog-close]="{ continue: false, closeParent: true }">
+    Close
+  </button>
+</div>

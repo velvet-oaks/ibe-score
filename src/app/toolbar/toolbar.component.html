@@ -1,0 +1,72 @@
+<mat-toolbar>
+	<div class="menu-icon-container">
+		<button
+			mat-icon-button
+			class="example-icon"
+			aria-label="Example icon-button with menu icon"
+			(click)="openNavFun()"
+			(openNav)="drawer.toggle()"
+			*ngIf="isAuthed">
+			<mat-icon>menu</mat-icon>
+		</button>
+		<span>IBE SCORE</span>
+	</div>
+	<span class="example-spacer"></span>
+	<div class="right-wrapper">
+		<div class="user-container">
+			<!-- <p
+				class="slot username"
+				*ngIf="isAuthed">
+				Welcome,
+				<ng-container *ngIf="authService.username$ | async as username">
+					{{ username }}
+				</ng-container>
+			</p> -->
+			<p
+				class="slot"
+				*ngIf="isAuthed">
+				Game Code:
+				<ng-container *ngIf="authService.slot$ | async as slot">
+					{{ slot }}
+				</ng-container>
+			</p>
+		</div>
+
+		<div class="login-out-container">
+			<button
+				mat-button
+				class="example-icon login favorite-icon"
+				aria-label="Example icon-button with heart icon"
+				(click)="openDialog('login')"
+				*ngIf="!isAuthed">
+				Login
+			</button>
+			<button
+				mat-button
+				class="example-icon signup favorite-icon"
+				aria-label="Example icon-button with heart icon"
+				(click)="openDialog('signUp')"
+				*ngIf="!isAuthed">
+				Sign Up
+			</button>
+			<button
+				mat-button
+				class="example-icon logout favorite-icon"
+				aria-label="Example icon-button with heart icon"
+				(click)="authService.logout()"
+				*ngIf="isAuthed">
+				Logout
+			</button>
+		</div>
+		<div class="password-reset-container">
+			<button
+				mat-button
+				class="forgot-password"
+				(click)="openForgotPassword()"
+				*ngIf="!isAuthed">Forgot Password</button>
+		</div>
+	</div>
+	<!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button> -->
+</mat-toolbar>

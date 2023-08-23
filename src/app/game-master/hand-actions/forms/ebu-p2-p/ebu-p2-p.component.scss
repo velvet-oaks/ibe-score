@@ -1,0 +1,32 @@
+form{
+    width: 80vw;
+    display: flex;
+}
+div{
+    height: min-content;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+mat-card{
+    width: 50%;
+    padding: 2%;
+    display: flex;
+}
+mat-form-field{
+	width: 90%;
+	margin-left:5%;
+}
+button{
+	width: 100%;
+    background-color: #cd0081 !important;
+    color: white !important;
+}
+#listLink{
+    width: 20%;
+}
+
+@media screen and (max-width: 1000px) {
+    div{
+        display: flow-root;
+    }
+}

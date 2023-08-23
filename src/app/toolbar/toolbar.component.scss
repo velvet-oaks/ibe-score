@@ -1,0 +1,54 @@
+// .example-spacer {
+// 	flex: 1 1 auto;
+// }
+mat-toolbar {
+	background-color: #cd0081;
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.menu-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right-wrapper,
+.user-container,
+.login-out-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login-out-container {
+	gap: 1em;
+	margin-right: 1em
+}
+
+button.login,
+button.signup {
+	border: 2px #fff solid;
+	border-radius: 0;
+	padding: 1em
+}
+button.login {
+	background-color: #99cc32;
+}
+
+p.slot {
+	font-size: 18px;
+	font-weight: 400;
+	letter-spacing: 1.25px;
+	margin-right: 40px;
+	margin-bottom: 0;
+	color: white;
+}
+
+p.username {
+	position: relative;
+	// right: 100px;
+}

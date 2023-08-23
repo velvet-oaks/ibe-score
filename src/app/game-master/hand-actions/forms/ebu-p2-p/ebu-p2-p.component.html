@@ -1,0 +1,124 @@
+<div>
+    <form [formGroup]="clubDetailsForm">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Club Details</mat-card-title>
+        </mat-card-header>
+
+            <mat-form-field >
+                <mat-label>Event Name</mat-label>
+                <input type="text" matInput formControlName="event_name"  placeholder="Ex. EBU Event">
+                <mat-error *ngIf="clubDetailsForm.controls.event_name.errors?.required">
+                    Event Name <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>Director Name</mat-label>
+                <input type="text" matInput formControlName="td_name"  placeholder="Ex. john_doe">
+                <mat-error *ngIf="clubDetailsForm.controls.td_name.errors?.required">
+                    Director Name <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>Director Email</mat-label>
+                <input type="email" matInput formControlName="td_email"placeholder="Ex. john_doe">
+                <mat-error *ngIf="clubDetailsForm.controls.td_email.errors?.required">
+                    Director Email <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+                <mat-label>EBU Club Name</mat-label>
+                <input type="text" matInput formControlName="club_name"  placeholder="Ex. EBU Club">
+                <mat-error *ngIf="clubDetailsForm.controls.club_name.errors?.required">
+                    club Name <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>EBU Club ID</mat-label>
+                <input type="text" matInput formControlName="club_id"  placeholder="Ex. 0000001">
+                <mat-error *ngIf="clubDetailsForm.controls.club_id.errors?.required">
+                    club ID <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>password</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-error *ngIf="clubDetailsForm.controls.password.errors?.required">
+                    password <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>Comment</mat-label>
+                <textarea type="text" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="comment"></textarea>
+            </mat-form-field>
+
+
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Game P2P Details</mat-card-title>
+        </mat-card-header>
+        <mat-form-field class="example-full-width">
+
+            <mat-label>EBU Charge Code</mat-label>
+            <mat-select formControlName="charge_code">
+                <mat-option value="02">2 -Null Session</mat-option>
+                <mat-option value="03">3 -Free Session</mat-option>
+                <mat-option value="04">4 -Novice Session</mat-option>
+                <mat-option value="05">4 -Novice Session</mat-option>
+                <mat-option value="06">4 -Novice Session</mat-option>
+                <mat-option value="07">4 -Novice Session</mat-option>
+                <mat-option value="08">4 -Novice Session</mat-option>
+                <mat-option value="10">4 -Novice Session</mat-option>
+                <mat-option value="11">4 -Novice Session</mat-option>
+                <mat-option value="12">4 -Novice Session</mat-option>
+                <mat-option value="14">4 -Novice Session</mat-option>
+                <mat-option value="20">4 -Novice Session</mat-option>
+                <mat-option value="21">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+                <mat-option value="30">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+                <mat-option value="22">4 -Novice Session</mat-option>
+            </mat-select>
+                <mat-error *ngIf="clubDetailsForm.controls.charge_code.errors?.required">
+                Charge Code is <strong>required</strong>
+                </mat-error>
+
+        </mat-form-field>
+        <a mat-flat-button id="listLink" target="_blank" href="https://www.ebu.co.uk/documents/universal-membership/player-session-rates.pdf">List</a>
+
+        <mat-slide-toggle formControlName="use_master">Master Points?</mat-slide-toggle>
+
+
+        <mat-form-field *ngIf="clubDetailsForm.value.use_master" class="example-full-width">
+
+            <mat-label>Master Point Type</mat-label>
+            <mat-select formControlName="master_color">
+                <mat-option value="black">Black</mat-option>
+                <mat-option value="blue">Blue</mat-option>
+                <mat-option value="green">Green</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+        <mat-form-field *ngIf="clubDetailsForm.value.use_master" class="example-full-width">
+
+            <mat-label>Master Point Scale</mat-label>
+            <mat-select formControlName="master_scale">
+                <mat-option value="club">Club</mat-option>
+                <mat-option value="district">District</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-checkbox *ngIf="clubDetailsForm.value.use_master" formControlName="use_master_perMatch" class="example-margin">Master Points per match won?</mat-checkbox>
+
+    </mat-card>
+    </form>
+
+    <button mat-raised-button (click)="submitClubDetails()">Download P2P File</button>
+</div>
+

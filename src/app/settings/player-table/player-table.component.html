@@ -1,0 +1,130 @@
+<br>
+<br>
+
+
+<div class="center">
+  <div >
+    <h1>Event Name: {{eventName}}</h1>
+    <mat-form-field>
+      <mat-label>Show Details</mat-label>
+      <mat-select (selectionChange)="changeDropdown($event)" class="panelClass">
+        <mat-option>None</mat-option>
+
+        <mat-option *ngFor="let value of dropdownValues" [value]="value.values">
+          {{value.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="htmlData">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+    <!-- Permaanent Columns-->
+
+    <ng-container matColumnDef="table">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.table}} </td>
+    </ng-container>
+    <ng-container matColumnDef="venue" >
+      <th mat-header-cell *matHeaderCellDef> Venue </th>
+      <td mat-cell *matCellDef="let element"> {{element.venue}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="board_colors">
+      <th mat-header-cell *matHeaderCellDef> Board Colors</th>
+      <td mat-cell *matCellDef="let element"> {{element.board_colors}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="stratification_1">
+      <th mat-header-cell *matHeaderCellDef> Stratification </th>
+      <td mat-cell *matCellDef="let element"> {{element.stratification_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sitter_1">
+      <th mat-header-cell *matHeaderCellDef> Sitter </th>
+      <td mat-cell *matCellDef="let element">  {{element.sitter_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="adjustments_1">
+      <th mat-header-cell *matHeaderCellDef> Adjustments </th>
+      <td mat-cell *matCellDef="let element">  {{element.adjustments_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="handicaps_1">
+      <th mat-header-cell *matHeaderCellDef> Handicaps </th>
+      <td mat-cell *matCellDef="let element">  {{element.handicaps_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="labels_1">
+      <th mat-header-cell *matHeaderCellDef> Labels </th>
+      <td mat-cell *matCellDef="let element">  {{element.labels_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="abbreiviations_1">
+      <th mat-header-cell *matHeaderCellDef> Abbreiviations </th>
+      <td mat-cell *matCellDef="let element">  {{element.abbreiviations_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="north_south">
+      <th mat-header-cell *matHeaderCellDef>  North & South </th>
+      <td mat-cell *matCellDef="let element"> {{element.ns_1.full_name}} & {{element.ns_2.full_name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="stratification_2">
+      <th mat-header-cell *matHeaderCellDef> Stratification </th>
+      <td mat-cell *matCellDef="let element">  {{element.stratification_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sitter_2">
+      <th mat-header-cell *matHeaderCellDef> Sitter</th>
+      <td mat-cell *matCellDef="let element"> {{element.sitter_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="adjustments_2">
+      <th mat-header-cell *matHeaderCellDef> Adjustments </th>
+      <td mat-cell *matCellDef="let element">  {{element.adjustments_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="handicaps_2">
+      <th mat-header-cell *matHeaderCellDef> Handicaps </th>
+      <td mat-cell *matCellDef="let element">  {{element.handicaps_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="labels_2">
+      <th mat-header-cell *matHeaderCellDef> Labels</th>
+      <td mat-cell *matCellDef="let element">  {{element.labels_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="abbreiviations_2">
+      <th mat-header-cell *matHeaderCellDef> Abbreiviations </th>
+      <td mat-cell *matCellDef="let element"> {{element.abbreiviations_1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="east_west">
+      <th mat-header-cell *matHeaderCellDef>  East & West </th>
+      <td mat-cell *matCellDef="let element"> {{element.ew_1.full_name}} & {{element.ew_2.full_name}} </td>
+    </ng-container>
+
+    <!-- Hidden Columns -->
+
+
+
+
+
+
+
+    <!-- <ng-container matColumnDef="lunch_times">
+      <th mat-header-cell *matHeaderCellDef> East & West </th>
+      <td mat-cell *matCellDef="let element"> {{element.ew_1}} & {{element.ew_2}} </td>
+    </ng-container> -->
+
+
+
+    <!-- <ng-container matColumnDef="east_west_one">
+      <th mat-header-cell *matHeaderCellDef> East and West </th>
+      <td mat-cell *matCellDef="let element"> {{element.east_west_one}} </td>
+    </ng-container>
+    <ng-container matColumnDef="east_west_two">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> {{element.east_west_two}} </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()" style="border-bottom: 1px solid white;"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+  </table>
+
+</div>
+
+<!--
+<button (click)="openPDF()">Test</button> -->

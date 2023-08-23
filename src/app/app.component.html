@@ -1,0 +1,73 @@
+<mat-drawer-container
+	class="example-container"
+	[hasBackdrop]="true">
+	<mat-drawer
+		#drawer
+		id="drawer"
+		mode="over"
+		(click)="drawer.toggle()">
+		<div class="top-nav">
+			<h1 class="logoText">IBE</h1>
+			<button mat-icon-button>
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+		<div class="inner">
+			<div class="nav-links">
+				<a
+					mat-flat-button
+					class="sideNavOption"
+					routerLink="gameMaster"
+					color="none"
+					routerLinkActive="active"
+					(click)="drawer.toggle()">
+					Master
+				</a>
+				<!-- <a
+				mat-flat-button
+				class="sideNavOption"
+				routerLink="main"
+				color="none"
+				routerLinkActive="active"
+				(click)="drawer.toggle()"
+			>
+				Hand Actions
+			</a> -->
+
+				<!-- <a mat-flat-button
+				 class="sideNavOption"
+				 routerLink="manageUsers"
+				 color="none"
+				 routerLinkActive="active"
+				 (click)="drawer.toggle()">Manage Users</a> -->
+				<a
+					mat-flat-button
+					class="sideNavOption"
+					routerLink="AccountSettings"
+					color="none"
+					routerLinkActive="active"
+					(click)="drawer.toggle()">
+					Account Settings
+				</a>
+			</div>
+
+			<!-- <a mat-flat-button class="sideNavOption"  routerLink="previous" color="none" routerLinkActive="active" (click)="drawer.toggle()">previous</a> -->
+			<!-- Settings at the bottom -->
+			<div class="bottom logo">
+				<img
+					src="assets/svg/globe_v4.svg"
+					width="100"
+					height="100"
+					alt=""
+					srcset="" />
+			</div>
+		</div>
+
+		<!-- <a  mat-flat-button class="sideNavOption settingsButton"  routerLink="settings" color="none" routerLinkActive="active" (click)="drawer
+        .toggle()"><mat-icon>settings</mat-icon> Settings</a> -->
+	</mat-drawer>
+	<mat-drawer-content id="content">
+		<app-toolbar (openNav)="drawer.toggle()"></app-toolbar>
+		<router-outlet id="router"></router-outlet>
+	</mat-drawer-content>
+</mat-drawer-container>

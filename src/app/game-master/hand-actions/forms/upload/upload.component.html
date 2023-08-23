@@ -1,0 +1,51 @@
+<mat-card *ngIf="uploadAcceptedTypes !== '.html'">
+  <mat-form-field appearance="fill">
+    <mat-label>Upload Type</mat-label>
+    <mat-select (selectionChange)="uploadAcceptedTypes = $event.source.value">
+      <mat-option value=".dlm, .dup, .pbn"> Single file (.dlm, .dup, .pbn) </mat-option>
+      <mat-option value=".lin"> Multiple files (.lin) </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="upload-wrapper">
+    <input type="file"
+
+           class="file-upload-original"
+           (change)="onFileSelected($event)"
+           #fileUpload />
+    <div class="file-upload"> {{ fileName || 'No file selected yet.' }} <button mat-mini-fab
+              color="primary"
+              class="upload-btn ibe-upload"
+              (click)="triggerClick(fileUpload)">
+        <mat-icon>attach_file</mat-icon>
+        <!-- <button
+						*ngIf="filesSelected"
+						(click)="uploadFiles()">
+						<h3>Upload Files</h3>
+						<mat-icon>cloud_upload</mat-icon>
+					</button> -->
+      </button>
+    </div>
+  </div>
+  <!-- <button mat-raised-button (click)="finalisedUpload()"> Upload</button> -->
+</mat-card>
+<mat-card *ngIf="uploadAcceptedTypes === '.html'">
+  <h3>Upload BBO Files Here (.html) (Click the icon, or drag your files over the icon)</h3>
+  <div class="upload-wrapper"
+       *ngIf="uploadAcceptedTypes === '.html'">
+    <input type="file"
+           class="file-upload-original"
+           (change)="onFileSelected($event)"
+           #bboUpload
+           multiple />
+    <div class="file-upload"> {{ fileName || 'No file selected yet.' }} <button mat-mini-fab
+              color="primary"
+              class="upload-btn ibe-upload"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
+              (click)="triggerClick(bboUpload)">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

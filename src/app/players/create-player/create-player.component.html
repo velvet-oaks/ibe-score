@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="top-container">
+    <h1>Create User: </h1>
+    <form class="create-user-form" [formGroup]="myForm">
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. John Doe">
+        <mat-error *ngIf="myForm.controls.name.errors?.required"> Name <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="myForm.controls.email.errors?.required"> Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.email.errors?.email"> Valid email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="tel_phone" [errorStateMatcher]="matcher" placeholder="Ex. +441134960000">
+        <mat-error *ngIf="myForm.controls.tel_phone.errors?.required"> Phone Number is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.tel_phone.errors"> Valid Number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" value="type">{{type}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="myForm.controls.type.errors?.required"> Type is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country">
+          <mat-option value="England">England</mat-option>
+          <mat-option value="Scotland">Scotland</mat-option>
+          <mat-option value="Wales">Wales</mat-option>
+          <mat-option value="NI">NI</mat-option>
+        </mat-select>
+        <mat-error *ngIf="myForm.controls.type.errors?.required"> Type is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Slot</mat-label>
+        <input type="text" matInput formControlName="slot" [errorStateMatcher]="matcher" placeholder="Ex. 1234">
+        <mat-error *ngIf="myForm.controls.slot.errors?.required"> Slot is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.slot.errors"> Valid Slot is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher" placeholder="Ex. John Doe">
+        <mat-error *ngIf="myForm.controls.password.errors?.minlength"> Password Needs to be <strong> {{myForm.controls.password.errors?.minlength.requiredLength}} char long</strong>
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.password.errors?.required"> Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Repeat Password</mat-label>
+        <input type="password" matInput formControlName="password_confirm" [errorStateMatcher]="matcher" placeholder="Ex. John Doe">
+        <mat-error *ngIf="myForm.controls.password_confirm.errors?.matchValidator"> Password Does Not <strong>Match</strong>
+        </mat-error>
+        <mat-error *ngIf="myForm.controls.password_confirm.errors?.required"> Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button class="submit" mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+    </form>
+  </div>
+</div>

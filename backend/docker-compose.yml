@@ -1,0 +1,59 @@
+version: '3.7'
+
+networks:
+  web:
+    external: true
+    name: web
+  backend:
+    external: true
+    name: backend
+
+services:
+
+  # reverse-proxy:
+  #   image: traefik:latest
+  #   container_name: traefik
+  #   hostname: traefik
+  #   ports:
+  #     # - '80:80'
+  #     # - '443:443'
+  #     - '8080:8080'
+  #   volumes:
+  #     - '/var/run/docker.sock:/var/run/docker.sock:ro'
+  #     - '$PWD/traefik:/etc/traefik:ro'
+  #     - './logs:/opt/traefik/logs/:rw'
+  #   labels:
+  #     - 'traefik.enable=true'
+  #     - 'traefik.http.routers.api.rule=Host(`traefik.staging.wearenv.co.uk`)'
+  #     - 'traefik.http.routers.api.service=api@internal'
+  #     - 'traefik.http.services.api.loadBalancer.server.port=8080'
+  #   networks:
+  #     - backend
+  #     - web
+
+  ibe-backend:
+    image: backend-image
+    container_name: ibe-backend
+    hostname: ibe-backend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+      - web
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - './.env'
+    volumes:
+      - './data:/data:rw'
+      - './src:/backend/src'
+      - './keys:/backend/keys:ro'
+    # labels:
+    #   - 'traefik.enable=true'
+    #   - 'traefik.http.routers.ibe-backend.rule=Host(`staging.wearenv.co.uk`)&& PathPrefix(`/brian_app/api`)'
+    #   - 'traefik.services.loadbalancer.server.port=3000'
+    #   - 'traefik.docker.network=backend'
