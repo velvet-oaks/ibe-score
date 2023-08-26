@@ -133,15 +133,64 @@
 			<mat-label>Type</mat-label>
 			<mat-select formControlName="type">
 				<mat-option
-					*ngFor="let type of types"
-					value="{{ type }}">
-					{{ type }}
+					*ngFor="let accountType of accountTypes"
+					value="{{ accountType.typeCode }}">
+					{{ accountType.name }}
 				</mat-option>
 			</mat-select>
 			<mat-error *ngIf="signUpForm.controls.type.errors?.required">
 				Type is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
+		<!-- <mat-form-field class="example-full-width city-mat-form-field">
+			<mat-label>City</mat-label>
+			<input
+				type="text"
+				matInput
+				[(ngModel)]="citySearchText"
+				(input)="filterCities()"
+				formControlName="city"
+				[errorStateMatcher]="matcher"
+				placeholder="Start typing.." />
+			<mat-autocomplete #auto="matAutocomplete">
+				<mat-option
+					*ngFor="let city of filteredCities"
+					[value]="city">
+					{{ city }}</mat-option
+				>
+			</mat-autocomplete>
+			<mat-error *ngIf="signUpForm.controls.email.errors?.required">
+				Email is <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.email.errors?.email">
+				Valid email is <strong>required</strong>
+			</mat-error>
+		</mat-form-field> -->
+		<!-- City -->
+		<mat-form-field>
+			<mat-label>City</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="city" />
+			<span
+				class="error-span"
+				*ngIf="
+					signUpForm.get('tel_phone').hasError('pattern') &&
+					signUpForm.get('tel_phone').touched
+				">
+				Phone Number is <strong>invalid</strong>
+			</span>
+			<span
+				class="error-span"
+				*ngIf="
+					signUpForm.get('tel_phone').hasError('required') &&
+					signUpForm.get('tel_phone').touched
+				">
+				Phone Number is <strong>required</strong>
+			</span>
+		</mat-form-field>
+		<!-- Country -->
 		<mat-form-field>
 			<mat-label>Country</mat-label>
 			<mat-select
@@ -154,9 +203,9 @@
 					>Select Country</mat-option
 				>
 				<mat-option
-					*ngFor="let country of countries"
+					*ngFor="let country of revisedCountries"
 					[value]="country.name"
-					>{{ country.name }}</mat-option
+					>{{ country.emoji + ' ' + country.name }}</mat-option
 				>
 				<!-- <mat-option value="England">England</mat-option>
 				<mat-option value="Scotland">Scotland</mat-option>
@@ -168,53 +217,69 @@
 				Type is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-		<div
-			class="form-field-custom"
-			style="display: flex">
-			<label
-				for="dialcode"
-				style="display: flex; flex-direction: column"
-				class="dialcode-label"
-				>Country Code
 
-				<input
-					type="text"
-					matInput
-					formControlName="dialingCode"
-					name="dialcode"
-					[readonly]="disabledDialingCode"
-					class="dialing-code"
+		<div class="custom-field-wrapper">
+			<div
+				class="form-field-custom"
+				style="display: flex">
+				<label
+					for="dialcode"
+					class="dialcode-label"
+					>Country Code
+					<input
+						type="text"
+						matInput
+						formControlName="dialingCode"
+						name="dialcode"
+						[readonly]="disabledDialingCode"
+						class="dialing-code"
+						[class.error]="
+							signUpForm.get('dialingCode').invalid &&
+							signUpForm.get('dialingCode').touched
+						"
+						placeholder="" />
+				</label>
+				<label
+					for="tel_phone"
+					class="tel-label"
 					[class.error]="
-						signUpForm.get('dialingCode').invalid &&
-						signUpForm.get('dialingCode').touched
-					"
-					placeholder="" />
-			</label>
-			<label
-				for="tel_phone"
-				class="tel-label"
-				style="display: flex; flex-direction: column"
-				>Telephone (without country code)
-				<input
-					class="tel-field"
-					type="email"
-					matInput
-					formControlName="tel_phone"
-					name="tel_phone"
-					[class.error]="
-						signUpForm.get('tel_phone').invalid &&
+						(signUpForm.get('tel_phone').hasError('required') ||
+							signUpForm.get('tel_phone').hasError('pattern')) &&
 						signUpForm.get('tel_phone').touched
 					"
-					placeholder="Ex. +441134960000" />
-				<span class="error-span"
-					*ngIf="
-						signUpForm.get('tel_phone').invalid &&
-						signUpForm.get('tel_phone').touched
-					">
-					Phone Number is <strong>invalid</strong>
-				</span>
-			</label>
+					>Telephone (without country code)
+					<input
+						class="tel-field"
+						type="email"
+						matInput
+						formControlName="tel_phone"
+						name="tel_phone"
+						[class.error]="
+							(signUpForm.get('tel_phone').hasError('pattern') ||
+								signUpForm.get('tel_phone').hasError('required')) &&
+							signUpForm.get('tel_phone').touched
+						"
+						placeholder="Ex. 01245554445" />
+				</label>
+			</div>
+			<span
+				class="error-span"
+				*ngIf="
+					signUpForm.get('tel_phone').hasError('pattern') &&
+					signUpForm.get('tel_phone').touched
+				">
+				Phone Number is <strong>invalid</strong>
+			</span>
+			<span
+				class="error-span"
+				*ngIf="
+					signUpForm.get('tel_phone').hasError('required') &&
+					signUpForm.get('tel_phone').touched
+				">
+				Phone Number is <strong>required</strong>
+			</span>
 		</div>
+
 		<!-- <mat-form-field
 			class="example-full-width mat-tel-field"
 			id="telephoneFieldWrapper">
@@ -291,6 +356,48 @@
 			<mat-error *ngIf="signUpForm.controls.password_confirm.errors?.required">
 				Password is <strong>required</strong>
 			</mat-error>
+		</mat-form-field>
+		<!-- Usage -->
+		<div radio-group>
+			<mat-label>What is your intended useage?</mat-label>
+			<mat-radio-group formControlName="usage">
+				<mat-radio-button
+					*ngFor="let usage of usageList"
+					[value]="usage.value"
+					[checked]="usage.checked"
+					[class.error]="
+						signUpForm.get('usage').hasError('required') &&
+						signUpForm.get('usage').touched
+					"
+					>{{ usage.label }}</mat-radio-button
+				>
+			</mat-radio-group>
+			<div class="info-wrapper">
+				<span class="info"
+					>We ask this to make a note on our records when we issue your game code,
+					so that we can best support you with relevant content (ie not send you
+					update information that has no relevance to your usage)
+				</span>
+			</div>
+			<span
+				class="error-span"
+				*ngIf="
+					signUpForm.get('usage').touched &&
+					signUpForm.get('usage').hasError('required')
+				">
+				Intended usage is <strong>required</strong>
+			</span>
+		</div>
+
+		<mat-form-field>
+			<mat-label>Comments</mat-label>
+			<textarea
+				matInput
+				formControlName="comments"
+				cdkTextareaAutosize
+				#autsize="cdkTextareaAutosize"
+				cdkAutosizeMinRows="1"
+				cdkAutosizeMaxRows="10"></textarea>
 		</mat-form-field>
 	</form>
 </div>
