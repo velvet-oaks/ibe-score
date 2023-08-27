@@ -12,6 +12,9 @@
 
 */backend/response/*
 
+# Bash scripts
+
+**/*.sh
 
 # User data
 */backend/db

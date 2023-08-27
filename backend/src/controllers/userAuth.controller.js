@@ -20,6 +20,8 @@ const RSA_PRIVATE_KEY = fs.readFileSync(
 	path.join(__dirname, '../../keys/private_key.pem')
 );
 
+// console.log(RSA_PRIVATE_KEY);
+
 const decryptedKey = crypto.createPrivateKey({
 	key: RSA_PRIVATE_KEY,
 	passphrase: keyPass

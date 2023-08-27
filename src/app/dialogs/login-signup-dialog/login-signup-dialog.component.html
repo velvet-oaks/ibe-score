@@ -82,12 +82,14 @@
 			</mat-tab>
 		</mat-tab-group>
 	</ng-container>
+
+	<!-- Sign Up Form -->
 	<form
 		class="example-form sign-up"
 		[formGroup]="signUpForm"
 		*ngIf="data.type == 'signUp'">
 		<mat-form-field>
-			<mat-label>Full Name</mat-label>
+			<mat-label>Full Name <strong class="required">*</strong></mat-label>
 			<input
 				type="text"
 				matInput
@@ -98,7 +100,7 @@
 				Name <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-		<mat-form-field>
+		<!-- <mat-form-field>
 			<mat-label>User Name</mat-label>
 			<input
 				type="text"
@@ -112,15 +114,19 @@
 			<mat-error *ngIf="!unqiueUserError">
 				UserName <strong>is taken</strong>
 			</mat-error>
-		</mat-form-field>
+		</mat-form-field> -->
 		<mat-form-field class="example-full-width">
-			<mat-label>Email</mat-label>
+			<mat-label>Contact Email <strong class="required">*</strong></mat-label>
 			<input
 				type="email"
 				matInput
 				formControlName="email"
 				[errorStateMatcher]="matcher"
 				placeholder="Ex. pat@example.com" />
+			<span class="info"
+				>This is the email address we will use to send your game code details and
+				communicate with you about your account with IBEScore</span
+			>
 			<mat-error *ngIf="signUpForm.controls.email.errors?.required">
 				Email is <strong>required</strong>
 			</mat-error>
@@ -128,9 +134,12 @@
 				Valid email is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-
+		<!-- Subscription Type -->
 		<mat-form-field>
-			<mat-label>Type</mat-label>
+			<span class="field-heading"
+				>Which subscription are you intending to purchase after the trial period
+				ends?<strong class="required">*</strong></span
+			>
 			<mat-select formControlName="type">
 				<mat-option
 					*ngFor="let accountType of accountTypes"
@@ -390,6 +399,44 @@
 		</div>
 
 		<mat-form-field>
+			<mat-radio-group>
+				<span class="field-heading"
+					>We are contantly developing our products to ensure our customers love our
+					products and customer service so what you think really matters to us.
+					Please tell us how you feel about giving feedback. Tick the box most
+					relevant to you<strong class="required">*</strong></span
+				>
+				<mat-radio-button
+					>I’m not sure please include me in research, but give me the chance to
+					unsubscribe
+				</mat-radio-button>
+				<mat-radio-button
+					>YES, I am willing to be contacted for feedback on my usage of IBEScore
+				</mat-radio-button>
+				<mat-radio-button
+					>YES. I love the App and will be happy to help get the word out to bridge
+					players
+				</mat-radio-button>
+				<mat-radio-button
+					>YES, I will rate the app in the App stores
+				</mat-radio-button>
+				<mat-radio-button
+					>YES, I am happy for you to publish my feedback in written endorsements
+				</mat-radio-button>
+				<mat-radio-button
+					>I will not give feedback and do not wish to be asked
+				</mat-radio-button>
+				<div class="info-wrapper">
+					<span class="info"
+						>Please respond to this question with confidence that we will never
+						publish anything that identifies you without gaining your specific
+						consent.</span
+					>
+				</div>
+			</mat-radio-group>
+		</mat-form-field>
+
+		<mat-form-field>
 			<mat-label>Comments</mat-label>
 			<textarea
 				matInput
@@ -398,6 +445,17 @@
 				#autsize="cdkTextareaAutosize"
 				cdkAutosizeMinRows="1"
 				cdkAutosizeMaxRows="10"></textarea>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Please tell us how your heard about IBEScore</mat-label>
+			<textarea
+				matInput
+				formControlName="howHeard"
+				cdkTextareaAutosize
+				#autsize="cdkTextareaAutosize"
+				cdkAutosizeMinRows="1"
+				cdkAutosizeMaxRows="10"></textarea>
+			<mat-error *ngIf="signUpForm.controls.howHeard.errors?.required"></mat-error>
 		</mat-form-field>
 	</form>
 </div>

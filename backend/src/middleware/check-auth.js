@@ -8,6 +8,7 @@ const RSA_PUBLIC_KEY = fs.readFileSync(
 );
 
 const keyPass = process.env.KEY_PASS;
+
 const decryptedKey = crypto.createPublicKey({
 	key: RSA_PUBLIC_KEY,
 	passphrase: keyPass
