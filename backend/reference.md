@@ -30,11 +30,7 @@ bexsilver                   # Seventh line, the type of bex account that is bein
 
 # testing account
 
-user name	 	:		robs
-email 			:		roberts@wearenv.co.uk
-Slot name	 	:		testSlot000
-Password 	 	:		FWIWd6oo
-directorId	:		64a889b60c3ecdab97bb7004
+
 
 
 # XML Parser

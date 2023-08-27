@@ -10,7 +10,10 @@
 </h1>
 <div
 	mat-dialog-content
-	[ngClass]="{ 'login-dialog': data.type === 'login' }">
+	[ngClass]="{
+		'login-dialog': data.type === 'login',
+		'sign-up-dialog': data.type === 'signUp'
+	}">
 	<ng-container *ngIf="data.type === 'login'">
 		<mat-tab-group
 			animationDuration="0ms"
@@ -100,21 +103,7 @@
 				Name <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-		<!-- <mat-form-field>
-			<mat-label>User Name</mat-label>
-			<input
-				type="text"
-				matInput
-				formControlName="username"
-				[errorStateMatcher]="matcher"
-				placeholder="Ex. John_Doe" />
-			<mat-error *ngIf="signUpForm.controls.username.errors?.required">
-				UserName <strong>required</strong>
-			</mat-error>
-			<mat-error *ngIf="!unqiueUserError">
-				UserName <strong>is taken</strong>
-			</mat-error>
-		</mat-form-field> -->
+		<!-- Email -->
 		<mat-form-field class="example-full-width">
 			<mat-label>Contact Email <strong class="required">*</strong></mat-label>
 			<input
@@ -123,10 +112,7 @@
 				formControlName="email"
 				[errorStateMatcher]="matcher"
 				placeholder="Ex. pat@example.com" />
-			<span class="info"
-				>This is the email address we will use to send your game code details and
-				communicate with you about your account with IBEScore</span
-			>
+
 			<mat-error *ngIf="signUpForm.controls.email.errors?.required">
 				Email is <strong>required</strong>
 			</mat-error>
@@ -134,13 +120,20 @@
 				Valid email is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
+		<span class="info"
+			>This is the email address we will use to send your game code details and
+			communicate with you about your account with IBEScore</span
+		>
 		<!-- Subscription Type -->
+		<span class="field-heading"
+			>Which subscription are you intending to purchase after the trial period
+			ends?<strong class="required">*</strong></span
+		>
 		<mat-form-field>
-			<span class="field-heading"
-				>Which subscription are you intending to purchase after the trial period
-				ends?<strong class="required">*</strong></span
-			>
-			<mat-select formControlName="type">
+			<mat-label>Choose subscription type</mat-label>
+			<mat-select
+				formControlName="type"
+				matInput>
 				<mat-option
 					*ngFor="let accountType of accountTypes"
 					value="{{ accountType.typeCode }}">
@@ -151,30 +144,7 @@
 				Type is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-		<!-- <mat-form-field class="example-full-width city-mat-form-field">
-			<mat-label>City</mat-label>
-			<input
-				type="text"
-				matInput
-				[(ngModel)]="citySearchText"
-				(input)="filterCities()"
-				formControlName="city"
-				[errorStateMatcher]="matcher"
-				placeholder="Start typing.." />
-			<mat-autocomplete #auto="matAutocomplete">
-				<mat-option
-					*ngFor="let city of filteredCities"
-					[value]="city">
-					{{ city }}</mat-option
-				>
-			</mat-autocomplete>
-			<mat-error *ngIf="signUpForm.controls.email.errors?.required">
-				Email is <strong>required</strong>
-			</mat-error>
-			<mat-error *ngIf="signUpForm.controls.email.errors?.email">
-				Valid email is <strong>required</strong>
-			</mat-error>
-		</mat-form-field> -->
+
 		<!-- City -->
 		<mat-form-field>
 			<mat-label>City</mat-label>
@@ -201,32 +171,23 @@
 		</mat-form-field>
 		<!-- Country -->
 		<mat-form-field>
-			<mat-label>Country</mat-label>
+			<mat-label>Select Country</mat-label>
 			<mat-select
 				formControlName="country"
-				id="country">
-				<mat-option
-					value=""
-					disabled
-					selected
-					>Select Country</mat-option
-				>
+				id="country"
+				matInput>
 				<mat-option
 					*ngFor="let country of revisedCountries"
 					[value]="country.name"
 					>{{ country.emoji + ' ' + country.name }}</mat-option
 				>
-				<!-- <mat-option value="England">England</mat-option>
-				<mat-option value="Scotland">Scotland</mat-option>
-				<mat-option value="Wales">Wales</mat-option>
-				<mat-option value="NI">NI</mat-option> -->
 			</mat-select>
 
 			<mat-error *ngIf="signUpForm.controls.type.errors?.required">
 				Type is <strong>required</strong>
 			</mat-error>
 		</mat-form-field>
-
+		<!-- Dialing Code & Telephone -->
 		<div class="custom-field-wrapper">
 			<div
 				class="form-field-custom"
@@ -288,33 +249,7 @@
 				Phone Number is <strong>required</strong>
 			</span>
 		</div>
-
-		<!-- <mat-form-field
-			class="example-full-width mat-tel-field"
-			id="telephoneFieldWrapper">
-			<mat-label>Phone Number</mat-label>
-			<input
-				type="text"
-				matInput
-				formControlName="dialingCode"
-				[readonly]="disabledDialingCode"
-				class="dialing-code"
-				placeholder="Country Code" />
-			<input
-				class="tel-field"
-				type="email"
-				matInput
-				formControlName="tel_phone"
-				[errorStateMatcher]="matcher"
-				placeholder="Ex. +441134960000" />
-
-			<mat-error *ngIf="signUpForm.controls.tel_phone.errors?.required">
-				Phone Number is <strong>required</strong>
-			</mat-error>
-			<mat-error *ngIf="signUpForm.controls.tel_phone.errors">
-				Valid Number is <strong>required</strong>
-			</mat-error>
-		</mat-form-field> -->
+		<!-- Slot Game Code -->
 		<mat-form-field class="example-full-width">
 			<mat-label>Slot</mat-label>
 			<input
@@ -329,9 +264,10 @@
 			<mat-error *ngIf="signUpForm.controls.slot.errors">
 				Valid Slot must be <strong>letters and numbers only</strong>
 			</mat-error>
-			<mat-hint> Choose or a game code, or one will be chosen for you </mat-hint>
+			<mat-hint>Choose or a game code, or one will be chosen for you</mat-hint>
 		</mat-form-field>
 		<br />
+		<!-- Passsword & Repeat Password -->
 		<mat-form-field>
 			<mat-label>Password</mat-label>
 			<input
@@ -398,63 +334,55 @@
 			</span>
 		</div>
 
-		<mat-form-field>
-			<mat-radio-group>
-				<span class="field-heading"
-					>We are contantly developing our products to ensure our customers love our
-					products and customer service so what you think really matters to us.
-					Please tell us how you feel about giving feedback. Tick the box most
-					relevant to you<strong class="required">*</strong></span
+		<mat-radio-group formControlName="feedback">
+			<span class="field-heading feedback"
+				>We are contantly developing our products to ensure our customers love our
+				products and customer service so what you think really matters to us. Please
+				tell us how you feel about giving feedback. Tick the box most relevant to
+				you</span
+			>
+			<mat-radio-button
+				>I’m not sure please include me in research, but give me the chance to
+				unsubscribe
+			</mat-radio-button>
+			<mat-radio-button
+				>YES, I am willing to be contacted for feedback on my usage of IBEScore
+			</mat-radio-button>
+			<mat-radio-button
+				>YES. I love the App and will be happy to help get the word out to bridge
+				players
+			</mat-radio-button>
+			<mat-radio-button
+				>YES, I will rate the app in the App stores
+			</mat-radio-button>
+			<mat-radio-button
+				>YES, I am happy for you to publish my feedback in written endorsements
+			</mat-radio-button>
+			<mat-radio-button
+				>I will not give feedback and do not wish to be asked
+			</mat-radio-button>
+			<div class="info-wrapper">
+				<span class="info"
+					>Please respond to this question with confidence that we will never
+					publish anything that identifies you without gaining your specific
+					consent.</span
 				>
-				<mat-radio-button
-					>I’m not sure please include me in research, but give me the chance to
-					unsubscribe
-				</mat-radio-button>
-				<mat-radio-button
-					>YES, I am willing to be contacted for feedback on my usage of IBEScore
-				</mat-radio-button>
-				<mat-radio-button
-					>YES. I love the App and will be happy to help get the word out to bridge
-					players
-				</mat-radio-button>
-				<mat-radio-button
-					>YES, I will rate the app in the App stores
-				</mat-radio-button>
-				<mat-radio-button
-					>YES, I am happy for you to publish my feedback in written endorsements
-				</mat-radio-button>
-				<mat-radio-button
-					>I will not give feedback and do not wish to be asked
-				</mat-radio-button>
-				<div class="info-wrapper">
-					<span class="info"
-						>Please respond to this question with confidence that we will never
-						publish anything that identifies you without gaining your specific
-						consent.</span
-					>
-				</div>
-			</mat-radio-group>
-		</mat-form-field>
+			</div>
+		</mat-radio-group>
 
 		<mat-form-field>
 			<mat-label>Comments</mat-label>
 			<textarea
 				matInput
-				formControlName="comments"
-				cdkTextareaAutosize
-				#autsize="cdkTextareaAutosize"
-				cdkAutosizeMinRows="1"
-				cdkAutosizeMaxRows="10"></textarea>
+				formControlName="comments"></textarea>
 		</mat-form-field>
+		<!-- User 'heard' feedback-->
+		<span class="field-heading">Please tell us how you heard about IBEScore</span>
 		<mat-form-field>
-			<mat-label>Please tell us how your heard about IBEScore</mat-label>
+			<mat-label>Type here..</mat-label>
 			<textarea
 				matInput
-				formControlName="howHeard"
-				cdkTextareaAutosize
-				#autsize="cdkTextareaAutosize"
-				cdkAutosizeMinRows="1"
-				cdkAutosizeMaxRows="10"></textarea>
+				formControlName="howHeard"></textarea>
 			<mat-error *ngIf="signUpForm.controls.howHeard.errors?.required"></mat-error>
 		</mat-form-field>
 	</form>

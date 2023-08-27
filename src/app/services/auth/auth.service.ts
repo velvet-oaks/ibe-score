@@ -290,6 +290,7 @@ export class AuthService {
 	//createUser(test: any){}
 	async createUser(formData: any) {
 		console.log(formData);
+		// return
 		let newUser = {
 			full_name: formData.value.name,
 			user_name: formData.value.username,

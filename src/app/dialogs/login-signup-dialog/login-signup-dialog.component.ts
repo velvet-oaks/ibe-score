@@ -187,11 +187,10 @@ export class LoginSignupDialogComponent implements OnInit {
 
 	signUpForm = this.fb.group({
 		name: ['', [Validators.required]],
-		first_name:['',[Validators.required]],
-		last_name:['',[Validators.required]],
+		first_name: ['', [Validators.required]],
+		last_name: ['', [Validators.required]],
 		username: ['', [Validators.required]],
-		// type: ['', [Validators.required]],
-		type: [''],
+		type: ['', [Validators.required]],
 		email: ['', [Validators.required, Validators.email]],
 		tel_phone: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
 		password: ['', [Validators.required, Validators.minLength(4)]],
@@ -202,7 +201,8 @@ export class LoginSignupDialogComponent implements OnInit {
 		city: ['', [Validators.required]],
 		usage: ['', [Validators.required]],
 		comments: [''],
-		howHeard: ['', [Validators.required]]
+		howHeard: ['', [Validators.required]],
+		feedback: ['', [Validators.required]]
 	});
 
 	matcher = new MyErrorStateMatcher();

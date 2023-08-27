@@ -2,7 +2,14 @@ h1 {
 	text-align: center;
 }
 
+.sign-up-dialog {
+	position: relative
+}
+
+
 form.sign-up {
+	position: relative;
+	top: 706px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -21,6 +28,20 @@ mat-form-field {
 	margin-left: 5%;
 }
 
+strong.required {
+	color: #f44336
+}
+
+.field-heading.feedback {
+	margin: 1em 0
+}
+
+.info,
+.info-wrapper {
+	padding: 1em 0;
+	line-height: 14px;
+}
+
 #telephoneFieldWrapper.mat-tel-field .mdc-form-field-flex>div {
 	position: relative;
 	display: flex !important;
@@ -34,7 +55,7 @@ button {
 }
 
 .mat-mdc-dialog-content {
-	max-height: 80vh;
+	// max-height: 80vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;

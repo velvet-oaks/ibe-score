@@ -5,11 +5,10 @@
 		"ng": "ng",
 		"start": "npm i && ng serve",
 		"build": "npm i && ng build --configuration production",
-		"build2": "npm i && ng build --configuration production --base-href /ibe/",
-		"build3": "npm i && ng build --configuration production --base-href /ibe-dev/",
+		"build2": "npm i && ng build --configuration production --base-href /ibescore/",
+		"build3": "npm i && ng build --configuration production --base-href /ibescore-dev/",
 		"watch": "ng build --watch --configuration development",
-		"test": "ng test",
-		"aws-deploy": "ng build && aws s3 sync dist/brian_app s3://serverless-angular/ && aws s3 sync backend s3://serverless-angular/backend"
+		"test": "ng test"
 	},
 	"private": true,
 	"dependencies": {

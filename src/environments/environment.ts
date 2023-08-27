@@ -1,5 +1,5 @@
 export const environment = {
-	API_URL: 'https://api.wearenv.co.uk/ibe/api',
-	ORIGIN: 'https://app.wearenv.co.uk',
+	API_URL: 'https://api.velvet-oaks.co.uk/ibe/',
+	ORIGIN: 'https://app.velvet-oaks.co.uk',
 	PRODUCTION: true
 };

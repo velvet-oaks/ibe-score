@@ -671,8 +671,8 @@
   _consuming: true,
   _dumped: false,
   next: [Function: next],
-  baseUrl: '/ibe/api/p2p',
-  originalUrl: '/ibe/api/p2p/uploadDeal',
+  baseUrl: '/ibescore/api/p2p',
+  originalUrl: '/ibescore/api/p2p/uploadDeal',
   _parsedUrl: Url {
     protocol: null,
     slashes: null,

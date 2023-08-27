@@ -35,21 +35,12 @@ const portExtraction = (req, res, next) => {
 	next();
 };
 
-
-
 // app.use(portMiddleware);
 
 app.use(portExtraction);
 // app.use(express.json);
 
 app.use((req, res, next) => {
-	// let allowedOrigin;
-	// if (process.env.NODE_ENV === 'production') {
-	// 	allowedOrigin = 'https://app.wearenv.co.uk'; // Replace with your actual production domain
-	// } else {
-	// 	allowedOrigin = `http://localhost:${currentDevPort}`; // Update with the correct variable or logic for development
-	// }
-
 	console.log('allowedOrigin value is...:' + allowedOrigin);
 	res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
 	res.setHeader(
@@ -127,12 +118,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use(express.static(path.join(__dirname,"../dist/brian_app")));
 //Assign Routes
-app.use('/ibe/api/auth', authRoute);
-app.use('/ibe/api/event', eventRoute);
-app.use('/ibe/api/test', createTestUsers);
-app.use('/ibe/api/p2p', p2pRoute);
-app.use('/ibe/api/deal_files', dealFiles);
-app.use('/ibe/api/mail', mailRoute);
+app.use('/ibe/auth', authRoute);
+app.use('/ibe/event', eventRoute);
+app.use('/ibe/test', createTestUsers);
+app.use('/ibe/p2p', p2pRoute);
+app.use('/ibe/deal_files', dealFiles);
+app.use('/ibe/mail', mailRoute);
 
 //Assign Angular Route
 
