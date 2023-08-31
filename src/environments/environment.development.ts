@@ -1,5 +1,5 @@
 export const environment = {
-	API_URL: 'http://localhost:3000/ibe',
+	API_URL: 'https://api.velvet-oaks.co.uk/ibescore',
 	ORIGIN: 'http://localhost:4200',
 	PRODUCTION: false
 };

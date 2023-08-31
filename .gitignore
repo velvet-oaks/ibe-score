@@ -7,6 +7,9 @@
 *backend/keys
 *.keyfile
 *.pem
+G_API
+**/backend/G_API
+*/credentials.json
 
 # uploads, logs, response bodies
 
@@ -35,7 +38,9 @@ backend/data/*
 
 */backend/src/util/add_to_mongo*
 backend/src/util/add*
-backend/src/util/*
+backend/src/util/genNew*
+backend/src/util/newHash*
+
 
 
 # Compiled output

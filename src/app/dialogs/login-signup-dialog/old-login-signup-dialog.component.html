@@ -1,180 +1,239 @@
-<h1 mat-dialog-title
-    *ngIf="data.type === 'login'"> Please Sign In </h1>
-<h1 mat-dialog-title
-    *ngIf="data.type === 'signUp'"> Please Sign Up </h1>
+<h1
+	mat-dialog-title
+	*ngIf="data.type === 'login'">
+	Please Sign In
+</h1>
+<h1
+	mat-dialog-title
+	*ngIf="data.type === 'signUp'">
+	Please Sign Up
+</h1>
 <div mat-dialog-content>
-  <ng-container *ngIf="data.type === 'login'">
-    <mat-tab-group animationDuration="0ms"
-                   (selectedTabChange)="selectedTab = $event.tab.textLabel.toLowerCase()">
-      <mat-tab label="Game Code">
-        <form [formGroup]="slotForm">
-          <!-- Slot form fields here -->
-          <mat-form-field>
-            <mat-label>Game Code</mat-label>
-            <input type="text"
-                   matInput
-                   formControlName="slot"
-                   [errorStateMatcher]="matcher"
-                   placeholder="Ex. slotABC123">
-            <mat-error *ngIf="slotForm.controls.slot.errors?.required"> Game Code <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input [type]="hide ? 'password' : 'text' "
-                   matInput
-                   formControlName="password"
-                   (keydown.enter)="submitForm()">
-            <mat-icon matSuffix
-                      (click)="hide = !hide"> {{ hide ? 'visibility_off' : 'visibility' }} </mat-icon>
-            <mat-error *ngIf="slotForm.controls.password.errors?.required"> Password <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </form>
-      </mat-tab>
-      <mat-tab label="Username">
-        <form [formGroup]="usernameForm">
-          <!-- Username form fields here -->
-          <mat-form-field>
-            <mat-label>User Name</mat-label>
-            <input type="text"
-                   matInput
-                   formControlName="user_name"
-                   placeholder="Ex. john_doe">
-            <mat-error *ngIf="usernameForm.controls.user_name.errors?.required"> UserName <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input [type]="hide ? 'password' : 'text' "
-                   matInput
-                   formControlName="password"
-                   (keydown.enter)="submitForm()">
-            <mat-icon matSuffix
-                      (click)="hide = !hide"> {{ hide ? 'visibility_off' : 'visibility' }} </mat-icon>
-            <mat-error *ngIf="usernameForm.controls.password.errors?.required"> Password <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </form>
-      </mat-tab>
-    </mat-tab-group>
-  </ng-container>
-  <form class="example-form"
-        [formGroup]="signUpForm"
-        *ngIf="data.type == 'signUp'">
-    <mat-form-field>
-      <mat-label>Full Name</mat-label>
-      <input type="text"
-             matInput
-             formControlName="name"
-             [errorStateMatcher]="matcher"
-             placeholder="Ex. John Doe">
-      <mat-error *ngIf="signUpForm.controls.name.errors?.required"> Name <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>User Name</mat-label>
-      <input type="text"
-             matInput
-             formControlName="username"
-             [errorStateMatcher]="matcher"
-             placeholder="Ex. John_Doe">
-      <mat-error *ngIf="signUpForm.controls.username.errors?.required"> UserName <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="!unqiueUserError"> UserName <strong>is taken</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input type="email"
-             matInput
-             formControlName="email"
-             [errorStateMatcher]="matcher"
-             placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="signUpForm.controls.email.errors?.required"> Email is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls.email.errors?.email"> Valid email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Phone Number</mat-label>
-      <input type="email"
-             matInput
-             formControlName="tel_phone"
-             [errorStateMatcher]="matcher"
-             placeholder="Ex. +441134960000">
-      <mat-error *ngIf="signUpForm.controls.tel_phone.errors?.required"> Phone Number is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls.tel_phone.errors"> Valid Number is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <mat-select formControlName="type">
-        <mat-option *ngFor="let type of types"
-                    value="{{type}}"> {{type}} </mat-option>
-      </mat-select>
-      <mat-error *ngIf="signUpForm.controls.type.errors?.required"> Type is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Country</mat-label>
-      <mat-select formControlName="country">
-        <mat-option value="England">England</mat-option>
-        <mat-option value="Scotland">Scotland</mat-option>
-        <mat-option value="Wales">Wales</mat-option>
-        <mat-option value="NI">NI</mat-option>
-      </mat-select>
-      <mat-error *ngIf="signUpForm.controls.type.errors?.required"> Type is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Slot</mat-label>
-      <input type="text"
-             matInput
-             formControlName="slot"
-             [errorStateMatcher]="matcher"
-             placeholder="Ex. 1234">
-      <mat-error *ngIf="signUpForm.controls.slot.errors?.required"> Slot is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls.slot.errors"> Valid Slot must be <strong>letters and numbers only</strong>
-      </mat-error>
-      <mat-hint> Choose or a game code, or one will be chosen for you </mat-hint>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input type="password"
-             matInput
-             formControlName="password"
-             [errorStateMatcher]="matcher">
-      <mat-error *ngIf="signUpForm.controls.password.errors?.minlength"> Password Needs to be <strong>
-          {{signUpForm.controls.password.errors?.minlength.requiredLength}} char long </strong>
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls.password.errors?.required"> Password is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Repeat Password</mat-label>
-      <input type="password"
-             matInput
-             formControlName="password_confirm"
-             [errorStateMatcher]="matcher">
-      <mat-error *ngIf="signUpForm.controls.password_confirm.errors?.matchValidator"> Password Does Not
-        <strong>Match</strong>
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls.password_confirm.errors?.required"> Password is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
+	<ng-container *ngIf="data.type === 'login'">
+		<mat-tab-group
+			animationDuration="0ms"
+			(selectedTabChange)="selectedTab = $event.tab.textLabel.toLowerCase()">
+			<mat-tab label="Game Code">
+				<form
+					[formGroup]="slotForm"
+					class="sign-up">
+					<!-- Slot form fields here -->
+					<mat-form-field>
+						<mat-label>Game Code</mat-label>
+						<input
+							type="text"
+							matInput
+							formControlName="slot"
+							[errorStateMatcher]="matcher"
+							placeholder="Ex. slotABC123" />
+						<mat-error *ngIf="slotForm.controls.slot.errors?.required">
+							Game Code <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Password</mat-label>
+						<input
+							[type]="hide ? 'password' : 'text'"
+							matInput
+							formControlName="password"
+							(keydown.enter)="submitForm()" />
+						<mat-icon
+							matSuffix
+							(click)="hide = !hide">
+							{{ hide ? 'visibility_off' : 'visibility' }}
+						</mat-icon>
+						<mat-error *ngIf="slotForm.controls.password.errors?.required">
+							Password <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</form>
+			</mat-tab>
+			<mat-tab label="Username">
+				<form [formGroup]="usernameForm">
+					<!-- Username form fields here -->
+					<mat-form-field>
+						<mat-label>User Name</mat-label>
+						<input
+							type="text"
+							matInput
+							formControlName="user_name"
+							placeholder="Ex. john_doe" />
+						<mat-error *ngIf="usernameForm.controls.user_name.errors?.required">
+							UserName <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Password</mat-label>
+						<input
+							[type]="hide ? 'password' : 'text'"
+							matInput
+							formControlName="password"
+							(keydown.enter)="submitForm()" />
+						<mat-icon
+							matSuffix
+							(click)="hide = !hide">
+							{{ hide ? 'visibility_off' : 'visibility' }}
+						</mat-icon>
+						<mat-error *ngIf="usernameForm.controls.password.errors?.required">
+							Password <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</form>
+			</mat-tab>
+		</mat-tab-group>
+	</ng-container>
+	<form
+		class="example-form sign-up-form"
+		[formGroup]="signUpForm"
+		*ngIf="data.type == 'signUp'">
+		<mat-form-field>
+			<mat-label>Full Name</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="name"
+				[errorStateMatcher]="matcher"
+				placeholder="Ex. John Doe" />
+			<mat-error *ngIf="signUpForm.controls.name.errors?.required">
+				Name <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>User Name</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="username"
+				[errorStateMatcher]="matcher"
+				placeholder="Ex. John_Doe" />
+			<mat-error *ngIf="signUpForm.controls.username.errors?.required">
+				UserName <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="!unqiueUserError">
+				UserName <strong>is taken</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+			<mat-label>Email</mat-label>
+			<input
+				type="email"
+				matInput
+				formControlName="email"
+				[errorStateMatcher]="matcher"
+				placeholder="Ex. pat@example.com" />
+			<mat-error *ngIf="signUpForm.controls.email.errors?.required">
+				Email is <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.email.errors?.email">
+				Valid email is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+			<mat-label>Phone Number</mat-label>
+			<input
+				type="email"
+				matInput
+				formControlName="tel_phone"
+				[errorStateMatcher]="matcher"
+				placeholder="Ex. +441134960000" />
+			<mat-error *ngIf="signUpForm.controls.tel_phone.errors?.required">
+				Phone Number is <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.tel_phone.errors">
+				Valid Number is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Type</mat-label>
+			<mat-select formControlName="type">
+				<mat-option
+					*ngFor="let type of types"
+					value="{{ type }}">
+					{{ type }}
+				</mat-option>
+			</mat-select>
+			<mat-error *ngIf="signUpForm.controls.type.errors?.required">
+				Type is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Country</mat-label>
+			<mat-select formControlName="country">
+				<mat-option value="England">England</mat-option>
+				<mat-option value="Scotland">Scotland</mat-option>
+				<mat-option value="Wales">Wales</mat-option>
+				<mat-option value="NI">NI</mat-option>
+			</mat-select>
+			<mat-error *ngIf="signUpForm.controls.type.errors?.required">
+				Type is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+			<mat-label>Slot</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="slot"
+				[errorStateMatcher]="matcher"
+				placeholder="Ex. 1234" />
+			<mat-error *ngIf="signUpForm.controls.slot.errors?.required">
+				Slot is <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.slot.errors">
+				Valid Slot must be <strong>letters and numbers only</strong>
+			</mat-error>
+			<mat-hint> Choose or a game code, or one will be chosen for you </mat-hint>
+		</mat-form-field>
+		<br />
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input
+				type="password"
+				matInput
+				formControlName="password"
+				[errorStateMatcher]="matcher" />
+			<mat-error *ngIf="signUpForm.controls.password.errors?.minlength">
+				Password Needs to be
+				<strong>
+					{{ signUpForm.controls.password.errors?.minlength.requiredLength }} char
+					long
+				</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.password.errors?.required">
+				Password is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Repeat Password</mat-label>
+			<input
+				type="password"
+				matInput
+				formControlName="password_confirm"
+				[errorStateMatcher]="matcher" />
+			<mat-error
+				*ngIf="signUpForm.controls.password_confirm.errors?.matchValidator">
+				Password Does Not
+				<strong>Match</strong>
+			</mat-error>
+			<mat-error *ngIf="signUpForm.controls.password_confirm.errors?.required">
+				Password is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+	</form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button
-          (click)="submitForm()"
-          cdkFocusInitial> Ok </button>
-  <button mat-button
-          color="warn"
-          (click)="onNoClick()"> Cancel </button>
+	<button
+		mat-button
+		(click)="submitForm()"
+		cdkFocusInitial>
+		Ok
+	</button>
+	<button
+		mat-button
+		color="warn"
+		(click)="onNoClick()">
+		Cancel
+	</button>
 </div>
 <!-- <h1 mat-dialog-title
     *ngIf="data.type == 'login'"> Please Sign In </h1>

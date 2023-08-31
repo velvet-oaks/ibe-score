@@ -15,42 +15,47 @@ const app = express();
 dotenv.config({
 	path: path.resolve(__dirname, './.env')
 });
-// global.__basedir = __dirname;
 
 // CORS and PORT retrieval
 let currentDevPort = '';
 const allowedOrigin = process.env.ORIGIN;
-console.log(allowedOrigin);
+const localHost = 'http://localhost:4200';
 
-const portExtraction = (req, res, next) => {
-	// if (!req.headers.origin.includes('localhost')) {
-	const port = req.headers.origin.split(':')[2] || '80';
-	console.log('extracted port is...: ' + port);
-	currentDevPort = port;
-	console.log('currentDevPort variable for front end is...: ' + currentDevPort);
-	// }
-	// console.log('Port extraction by method of splitting at ":" commencing..');
-	// console.log(req.headers);
+const originArray = [process.env.ORIGIN, localHost];
 
-	next();
-};
+console.log(`allowedOrigin/s are: ${allowedOrigin} & http://${localHost}:4200`);
+
+// const portExtraction = (req, res, next) => {
+// 	if (!req.headers.origin.includes('localhost')) {
+// 		const port = req.headers.origin.split(':')[2] || '80';
+// 		console.log('extracted port is...: ' + port);
+// 		currentDevPort = port;
+// 		console.log('currentDevPort variable for front end is...: ' + currentDevPort);
+// 	}
+// 	// console.log('Port extraction by method of splitting at ":" commencing..');
+// 	// console.log(req.headers);
+
+// 	next();
+// };
 
 // app.use(portMiddleware);
 
-app.use(portExtraction);
+// app.use(portExtraction);
 // app.use(express.json);
 
 app.use((req, res, next) => {
-	console.log('allowedOrigin value is...:' + allowedOrigin);
-	res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
-	res.setHeader(
-		'Access-Control-Allow-Headers',
-		'Origin,X-Requested-With, Content-Type,Accept,Authorization, X-Port, Prod'
-	);
+	// if ((req.origin = allowedOrigin) || req.headers.origin.includes('localhost'))
+	const actualOrigin = req.headers.origin;
+	if (originArray.includes(actualOrigin)) {
+		res.setHeader('Access-Control-Allow-Origin', actualOrigin);
+	} else {
+		return res.status(403).send('Unauthorized Origin');
+	}
 	res.setHeader(
 		'Access-Control-Allow-Methods',
 		'GET,POST,PATCH,DELETE,OPTIONS,PUT'
 	);
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 	if (req.method === 'OPTIONS') {
 		res.sendStatus(200);
 	} else {
@@ -66,6 +71,7 @@ const p2pRoute = require('./src/routes/p2p');
 const createTestUsers = require('./src/routes/testUsers');
 const dealFiles = require('./src/routes/dealFiles');
 const mailRoute = require('./src/routes/mailRoute');
+const newRegistrationRoute = require('./src/routes/newRegistration');
 //Initalise App
 
 function decodeBSON(req, res, next) {
@@ -118,12 +124,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use(express.static(path.join(__dirname,"../dist/brian_app")));
 //Assign Routes
-app.use('/ibe/auth', authRoute);
-app.use('/ibe/event', eventRoute);
-app.use('/ibe/test', createTestUsers);
-app.use('/ibe/p2p', p2pRoute);
-app.use('/ibe/deal_files', dealFiles);
-app.use('/ibe/mail', mailRoute);
+app.use('/ibescore/auth', authRoute);
+app.use('/ibescore/event', eventRoute);
+app.use('/ibescore/test', createTestUsers);
+app.use('/ibescore/p2p', p2pRoute);
+app.use('/ibescore/deal_files', dealFiles);
+app.use('/ibescore/mail', mailRoute);
+app.use('/ibescore/register', newRegistrationRoute);
 
 //Assign Angular Route
 

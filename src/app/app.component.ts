@@ -9,8 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { AuthService } from './services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatDrawer } from '@angular/material/sidenav';
+import { filter } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
@@ -31,12 +32,29 @@ export class AppComponent {
 		this.drawer.open();
 	}
 	title = 'ibe-score';
+	onDisplay?: boolean = true;
+
 	constructor(
 		public eventService: EventsService,
 		private fb: FormBuilder,
 		private authService: AuthService,
+		private router: Router,
 		private route: ActivatedRoute
-	) {}
+	) {
+		// this.router.events
+		// 	.pipe(filter(event => event instanceof NavigationEnd))
+		// 	.subscribe(() => {
+		// 		const currentRoute = this.route.snapshot.routeConfig?.path;
+		// 		console.log(currentRoute);
+		// 		if (currentRoute === 'registration') {
+		// 			console.log(currentRoute);
+		// 			this.onDisplay = false;
+		// 		}
+		// 		{
+		// 			this.onDisplay = true;
+		// 		}
+		// 	});
+	}
 	ngOnInit(): void {
 		this.authService.autoAuth();
 		//console.log('env'+environment.API_URL);

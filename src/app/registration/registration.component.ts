@@ -9,7 +9,7 @@ import {
 	Validators
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { UsersService } from 'src/app/services/account/users.service';
 import { HttpClient } from '@angular/common/http';
@@ -47,13 +47,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 	}
 }
 @Component({
-	selector: 'app-login-signup-dialog',
-	templateUrl: './old-login-signup-dialog.component.html',
-	styleUrls: ['./login-signup-dialog.component.scss']
+	selector: 'app-registration',
+	templateUrl: './registration.component.html',
+	styleUrls: ['./registration.component.scss']
 })
 
 // LoginSignupDialogComponent
-export class LoginSignupDialogComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 	// public cities: CityModel[] = cities;
 
 	public cityNames: string[] = [];
@@ -61,7 +61,7 @@ export class LoginSignupDialogComponent implements OnInit {
 	public filteredCities: string[] = [];
 	public usageList: UsageModel[] = usageList;
 
-	types = ['bexbronze', 'bexsilver', 'bexgold', ''];
+	// types = ['bexbronze', 'bexsilver', 'bexgold', ''];
 	unqiueUserError: any = false;
 	hidePassword: boolean = true;
 	hide = true;
@@ -91,7 +91,7 @@ export class LoginSignupDialogComponent implements OnInit {
 	// public filteredCities: string[] = [];
 
 	constructor(
-		public dialogRef: MatDialogRef<LoginSignupDialogComponent>,
+		public dialogRef: MatDialogRef<RegistrationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: DialogData,
 		private fb: FormBuilder,
 		private authService: AuthService,
@@ -112,27 +112,27 @@ export class LoginSignupDialogComponent implements OnInit {
 			}
 		});
 
-		// this.signUpForm
-		// 	.get('country')
-		// 	.valueChanges.subscribe((selectedCountry: string) => {
-		// 		const dialingCode = this.findValueInData<string>(
-		// 			selectedCountry,
-		// 			this.revisedCountries,
-		// 			'name'
-		// 		);
-		// 		this.signUpForm.get('dialingCode').setValue(dialingCode);
-		// 	});
+		this.signUpForm
+			.get('country')
+			.valueChanges.subscribe((selectedCountry: string) => {
+				const dialingCode = this.findValueInData<string>(
+					selectedCountry,
+					this.revisedCountries,
+					'name'
+				);
+				this.signUpForm.get('dialingCode').setValue(dialingCode);
+			});
 
-		// this.signUpForm
-		// 	.get('country')
-		// 	.valueChanges.subscribe((selectedCountry: string) => {
-		// 		const matchedCountry = this.revisedCountries.find(
-		// 			country => country.name === selectedCountry
-		// 		);
-		// 		if (matchedCountry) {
-		// 			this.signUpForm.get('dialingCode').setValue(matchedCountry.dial_code);
-		// 		}
-		// 	});
+		this.signUpForm
+			.get('country')
+			.valueChanges.subscribe((selectedCountry: string) => {
+				const matchedCountry = this.revisedCountries.find(
+					country => country.name === selectedCountry
+				);
+				if (matchedCountry) {
+					this.signUpForm.get('dialingCode').setValue(matchedCountry.dial_code);
+				}
+			});
 	}
 
 	findValueInData<T>(selectedValue: any, dataStore: any[], searchField: string): T {
@@ -187,8 +187,8 @@ export class LoginSignupDialogComponent implements OnInit {
 
 	signUpForm = this.fb.group({
 		name: ['', [Validators.required]],
-		// first_name: ['', [Validators.required]],
-		// last_name: ['', [Validators.required]],
+		first_name: ['', [Validators.required]],
+		last_name: ['', [Validators.required]],
 		username: ['', [Validators.required]],
 		type: ['', [Validators.required]],
 		email: ['', [Validators.required, Validators.email]],
@@ -197,12 +197,12 @@ export class LoginSignupDialogComponent implements OnInit {
 		password_confirm: ['', [Validators.required, this.matchValidator('password')]],
 		country: ['', [Validators.required]],
 		slot: ['', [Validators.pattern('^[a-zA-Z0-9]*$')]],
-		// dialingCode: [''],
-		// city: ['', [Validators.required]],
-		// usage: ['', [Validators.required]],
-		// comments: [''],
-		// howHeard: ['', [Validators.required]],
-		// feedback: ['', [Validators.required]]
+		dialingCode: [''],
+		city: ['', [Validators.required]],
+		usage: ['', [Validators.required]],
+		comments: [''],
+		howHeard: ['', [Validators.required]],
+		feedback: ['', [Validators.required]]
 	});
 
 	matcher = new MyErrorStateMatcher();
@@ -210,12 +210,7 @@ export class LoginSignupDialogComponent implements OnInit {
 		this.dialogRef.close();
 	}
 
-	// getDialingCode() {
-	// 	const selectedCountry = this.signUpForm.get('country').value;
-	// }
-
 	submitForm() {
-		console.log(this.signUpForm);
 		console.log('checking submit form...');
 		if (this.data.type === 'login') {
 			if (this.selectedTab === 'slot' && this.slotForm.valid) {
@@ -254,46 +249,4 @@ export class LoginSignupDialogComponent implements OnInit {
 			}
 		}
 	}
-
-	// submitForm() {
-	// 	console.log('checking submit form...');
-	// 	if (this.data.type === 'login') {
-	// 		if (this.selectedTab === 'slot' && this.slotForm.valid) {
-	// 			const slotName = this.slotForm.get('slot').value;
-	// 			const password = this.slotForm.get('password').value;
-
-	// 			this.data.loginType = 'slot';
-	// 			this.data.username = slotName;
-	// 			this.data.password = password;
-
-	// 			this.authService.login(this.data);
-	// 			this.dialogRef.close();
-	// 		} else if (this.selectedTab === 'username' && this.usernameForm.valid) {
-	// 			const username = this.usernameForm.get('user_name').value;
-	// 			const password = this.usernameForm.get('password').value;
-
-	// 			this.data.loginType = 'user_name';
-	// 			this.data.username = username;
-	// 			this.data.password = password;
-
-	// 			this.authService.login(this.data);
-	// 			this.dialogRef.close();
-	// 		} else {
-	// 			if (this.selectedTab === 'slot') {
-	// 				this.slotForm.markAllAsTouched();
-	// 			} else if (this.selectedTab === 'username') {
-	// 				this.usernameForm.markAllAsTouched();
-	// 			}
-	// 		}
-	// 	} else {
-
-	// 			this.authService.createUser(this.signUpForm);
-	// 			this.dialogRef.close();
-	// 		} else {
-	// 			this.signUpForm.markAllAsTouched();
-	// 		}
-	// 	}
-	// }
-
-	// submitForm() {}
 }

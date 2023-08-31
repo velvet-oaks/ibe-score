@@ -18,20 +18,20 @@ const smtp = {
 	secure: true, // use TLS
 
 	auth: {
-		user: process.env.SMTP_EMAIL,
-		pass: process.env.SMTP_PASS
+		user: process.env.SMTP_EMAIL_1,
+		pass: process.env.SMTP_PASS_1
 	}
 };
 
 async function sendNodeMail(contact) {
-	console.log(contact)
+	console.log(contact);
 	const transport = nodemailer.createTransport(smtp);
 	const template = await readFileAsync(
 		path.join(__dirname, '..', 'email', 'templates', 'basic_email.html'),
 		'utf8'
 	);
 	try {
-		console.log('email contact',contact);
+		console.log('email contact', contact);
 		let mailOptions = {
 			from: smtp.auth.user,
 			to: contact.email,

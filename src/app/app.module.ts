@@ -42,6 +42,7 @@ import { UsebioComponent } from './game-master/use-bio/usebio.component';
 import { DirectorsModule } from './directors/directors.module';
 import { PasswordResetComponent } from './directors/password-reset/password-reset.component';
 import { ExtendedSignupComponent } from './extended-signup/extended-signup.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
 	declarations: [
@@ -67,7 +68,8 @@ import { ExtendedSignupComponent } from './extended-signup/extended-signup.compo
 		UsebioComponent,
 		SuccessDialogComponent,
 		PasswordResetComponent,
-		ExtendedSignupComponent
+		ExtendedSignupComponent,
+		RegistrationComponent
 	],
 	imports: [
 		BrowserModule,
@@ -88,7 +90,7 @@ import { ExtendedSignupComponent } from './extended-signup/extended-signup.compo
 		BrowserAnimationsModule,
 		MatDialogModule,
 		// Custom modules
-		DirectorsModule,
+		DirectorsModule
 	],
 
 	providers: [
@@ -98,7 +100,8 @@ import { ExtendedSignupComponent } from './extended-signup/extended-signup.compo
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorLoggingInterceptor,
 			multi: true
-		}
+		},
+		{ provide: MatDialogModule, useValue: {} }
 	],
 
 	bootstrap: [AppComponent]

@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import {
+	ActivatedRoute,
+	RouterModule,
+	Routes,
+	NavigationEnd
+} from '@angular/router';
 import { AppComponent } from './app.component';
 import { GameMasterHomeComponent } from './game-master/game-master-home/game-master-home.component';
 import { AuthGuard } from './services/auth/auth.guard';
@@ -10,10 +15,21 @@ import { SettingsTabComponent } from './settings/settings-tab/settings-tab.compo
 import { DirectorsComponent } from './directors/directors.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HomeComponentComponent } from './home-component/home-component.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
 	{
 		path: '',
+		// redirectTo: 'registration',
+		// pathMatch: 'full'
+		component: WelcomePageComponent
+	},
+	{
+		path: 'registration',
+		component: RegistrationComponent
+	},
+	{
+		path: 'existing-signup',
 		component: WelcomePageComponent
 	},
 	{

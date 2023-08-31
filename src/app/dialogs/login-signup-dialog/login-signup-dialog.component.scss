@@ -6,10 +6,21 @@ h1 {
 	position: relative
 }
 
+form.sign-up-form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 1em
+}
 
-form.sign-up {
+form.sign-up-form mat-form-field {
+	width: 100%;
+	margin: auto;
+}
+
+form.sign-up-form {
 	position: relative;
-	top: 706px;
+	top: 160px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
