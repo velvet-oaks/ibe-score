@@ -17,13 +17,12 @@ dotenv.config({
 });
 
 // CORS and PORT retrieval
-let currentDevPort = '';
 const allowedOrigin = process.env.ORIGIN;
 const localHost = 'http://localhost:4200';
 
 const originArray = [process.env.ORIGIN, localHost];
 
-console.log(`allowedOrigin/s are: ${allowedOrigin} & http://${localHost}:4200`);
+console.log(`allowedOrigin/s are: ${allowedOrigin} & ${localHost}`);
 
 // const portExtraction = (req, res, next) => {
 // 	if (!req.headers.origin.includes('localhost')) {
@@ -124,6 +123,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.use(express.static(path.join(__dirname,"../dist/brian_app")));
 //Assign Routes
+app.get('/ibescore/api-check', (req, res) => {
+	res.status(200).json({ message: 'API working' });
+});
 app.use('/ibescore/auth', authRoute);
 app.use('/ibescore/event', eventRoute);
 app.use('/ibescore/test', createTestUsers);

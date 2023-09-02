@@ -18,7 +18,6 @@ Category data columns should contain only the category option ID number (ex: 1, 
 
 
 # Reference for Create User
-
 trial                       # First line, always just the string "trial". This isn't used
 Victor Lesk                 # Second line, the name of the account holder
 victorlesk@hotmail.com      # Third line, the email of the account holder
