@@ -24,26 +24,7 @@ const originArray = [process.env.ORIGIN, localHost];
 
 console.log(`allowedOrigin/s are: ${allowedOrigin} & ${localHost}`);
 
-// const portExtraction = (req, res, next) => {
-// 	if (!req.headers.origin.includes('localhost')) {
-// 		const port = req.headers.origin.split(':')[2] || '80';
-// 		console.log('extracted port is...: ' + port);
-// 		currentDevPort = port;
-// 		console.log('currentDevPort variable for front end is...: ' + currentDevPort);
-// 	}
-// 	// console.log('Port extraction by method of splitting at ":" commencing..');
-// 	// console.log(req.headers);
-
-// 	next();
-// };
-
-// app.use(portMiddleware);
-
-// app.use(portExtraction);
-// app.use(express.json);
-
 app.use((req, res, next) => {
-	// if ((req.origin = allowedOrigin) || req.headers.origin.includes('localhost'))
 	const actualOrigin = req.headers.origin;
 	if (originArray.includes(actualOrigin)) {
 		res.setHeader('Access-Control-Allow-Origin', actualOrigin);
@@ -61,6 +42,21 @@ app.use((req, res, next) => {
 		next();
 	}
 });
+
+// app.use((req, res, next) => {
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+
+// 	res.setHeader(
+// 		'Access-Control-Allow-Methods',
+// 		'GET,POST,PATCH,DELETE,OPTIONS,PUT'
+// 	);
+// 	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// 	if (req.method === 'OPTIONS') {
+// 		res.sendStatus(200);
+// 	} else {
+// 		next();
+// 	}
+// });
 
 //Import Routes
 // const authRoute = require('./src/routes/auth');

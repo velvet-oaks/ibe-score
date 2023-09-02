@@ -306,7 +306,8 @@ export class AuthService {
 		await this.http
 			.post<{ message: String; err: any; user: any }>(
 				environment.API_URL + '/auth',
-				newUser
+				newUser,
+				{ withCredentials: true }
 			)
 			.subscribe(responseData => {
 				if (responseData.err) {
