@@ -6,6 +6,7 @@ const createAuthClient = require('./serviceAccountAuthController');
 // const authorize = require('./googleAuthController');
 const SPREADSHEET_ID = '1TKIhZDkGbAvH6WESjyCXiEpBUM4BUUXXOvvej77PzrU';
 const tabName = 'Ibe Sign Ups';
+const testTab = 'sign-ups-test';
 const keys = [
 	'firstName',
 	'lastName',
@@ -37,17 +38,18 @@ const columnMap = {
 	'Usage': 'J',
 	'How did they hear': 'K',
 	'Feedback Choice': 'L',
-	'Any comments': 'M'
+	'Any comments': 'M',
+	'Time Stamp': 'N'
 };
 
-function getColumnLetter(key) {
-	if (columnMap.hasOwnProperty(key)) {
-		console.log('columnMap [Key]: ', columnMap[key], 'key: ', key);
-		return columnMap[key];
-	} else {
-		return '';
-	}
-}
+// function getColumnLetter(key) {
+// 	if (columnMap.hasOwnProperty(key)) {
+// 		console.log('columnMap [Key]: ', columnMap[key], 'key: ', key);
+// 		return columnMap[key];
+// 	} else {
+// 		return '';
+// 	}
+// }
 
 // Add new sign up to google sheet
 
@@ -60,7 +62,8 @@ async function addNewSignUp(req, res, next) {
 				.status(400)
 				.json({ message: 'Bad request, request body missing.' });
 		} else {
-			data = req.body;
+			data = { ...req.body };
+			data.time = new Date().toLocaleString();
 		}
 
 		let mappedData;
@@ -80,7 +83,7 @@ async function addNewSignUp(req, res, next) {
 		const sheets = google.sheets({ version: 'v4', auth: authClient });
 		const response = await sheets.spreadsheets.values.get({
 			spreadsheetId: SPREADSHEET_ID,
-			range: `${tabName}!A:M`
+			range: `${tabName}!A:N`
 		});
 
 		const firstEmptyRow = response.data.values

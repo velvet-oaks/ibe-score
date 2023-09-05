@@ -70,7 +70,8 @@ function mapDataWithMapping(data) {
 		usage: 'Usage',
 		howHeard: 'How did they hear',
 		feedback: 'Feedback Choice',
-		comments: 'Any comments'
+		comments: 'Any comments',
+		time: 'Time Stamp'
 	};
 	for (const key in data) {
 		if (data.hasOwnProperty(key) && propertyMapping[key]) {

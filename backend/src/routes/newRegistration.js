@@ -10,6 +10,11 @@ const router = express.Router();
 
 const filterKeys = ['firstName', 'lastName'];
 
+router.post('/sheet-test', (req, res) => {
+	sheetsController.addNewSignUp(req);
+	res.status(200).send('Success');
+});
+
 // router.post('/', (req, res) => {
 // 	const data = req.body;
 // 	console.log(data);
