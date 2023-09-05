@@ -15,7 +15,7 @@
 		</div>
 		<div class="inner">
 			<div class="nav-links">
-				<a
+				<!-- <a
 					mat-flat-button
 					class="sideNavOption"
 					routerLink="gameMaster"
@@ -23,7 +23,7 @@
 					routerLinkActive="active"
 					(click)="drawer.toggle()">
 					Master
-				</a>
+				</a> -->
 				<!-- <a
 				mat-flat-button
 				class="sideNavOption"
@@ -68,8 +68,7 @@
         .toggle()"><mat-icon>settings</mat-icon> Settings</a> -->
 	</mat-drawer>
 	<mat-drawer-content id="content">
-		<app-toolbar
-			(openNav)="drawer.toggle()"></app-toolbar>
+		<app-toolbar (openNav)="drawer.toggle()"></app-toolbar>
 		<router-outlet id="router"></router-outlet>
 	</mat-drawer-content>
 </mat-drawer-container>

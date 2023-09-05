@@ -5,14 +5,14 @@ const dataMapping = require('../../util/columnsMapping');
 const createAuthClient = require('./serviceAccountAuthController');
 // const authorize = require('./googleAuthController');
 const SPREADSHEET_ID = '1TKIhZDkGbAvH6WESjyCXiEpBUM4BUUXXOvvej77PzrU';
-
+const tabName = 'Ibe Sign Ups';
 const keys = [
 	'firstName',
 	'lastName',
 	'type',
 	'email',
 	'internationalTelNumber',
-	'directorKey',
+	'password',
 	'gameCode',
 	'country',
 	'city',
@@ -21,6 +21,107 @@ const keys = [
 	'feedback',
 	'comments'
 ];
+
+// Google sheet column mapping
+// prettier-ignore
+const columnMap = {
+	'First Name': 'A',
+	'Last Name': 'B',
+	'Subscription Type': 'C',
+	'Email': 'D',
+	'Telephone Number': 'E',
+	'Director Key': 'F',
+	'Game Code': 'G',
+	'Country': 'H',
+	'City': 'I',
+	'Usage': 'J',
+	'How did they hear': 'K',
+	'Feedback Choice': 'L',
+	'Any comments': 'M'
+};
+
+function getColumnLetter(key) {
+	if (columnMap.hasOwnProperty(key)) {
+		console.log('columnMap [Key]: ', columnMap[key], 'key: ', key);
+		return columnMap[key];
+	} else {
+		return '';
+	}
+}
+
+// Add new sign up to google sheet
+
+async function addNewSignUp(req, res, next) {
+	// console.log('addNewsignUp data: ',data);
+	try {
+		let data;
+		if (!req.body) {
+			return res
+				.status(400)
+				.json({ message: 'Bad request, request body missing.' });
+		} else {
+			data = req.body;
+		}
+
+		let mappedData;
+		let dataArray;
+		if (data) {
+			mappedData = dataMapping.mapDataWithMapping(data);
+			// console.log('Mapped data: ', JSON.stringify(mappedData, null, 2));
+			dataArray = dataMapping.mapToArray(mappedData);
+		} else {
+			throw Error('no data');
+		}
+
+		// console.log('dataArray: ', JSON.stringify(dataArray, null, 1));
+
+		const authClient = await createAuthClient();
+
+		const sheets = google.sheets({ version: 'v4', auth: authClient });
+		const response = await sheets.spreadsheets.values.get({
+			spreadsheetId: SPREADSHEET_ID,
+			range: `${tabName}!A:M`
+		});
+
+		const firstEmptyRow = response.data.values
+			? response.data.values.length + 1
+			: 0;
+		console.log('Last row: ', firstEmptyRow);
+
+		dataArray.forEach(async entry => {
+			const colKey = Object.keys(columnMap).find(key =>
+				Object.keys(entry).includes(key)
+			);
+			const column = columnMap[colKey] || '';
+			// console.log('column is :', column);
+			// console.log('data entered is: ', Object.values(entry));
+			// return;
+			const cellAddress = `${tabName}!${column}${firstEmptyRow}:${column}${firstEmptyRow}`;
+			// console.log('cellAddress: ', cellAddress);
+
+			try {
+				await sheets.spreadsheets.values.update({
+					spreadsheetId: SPREADSHEET_ID,
+					range: cellAddress,
+					valueInputOption: 'USER_ENTERED',
+
+					resource: {
+						values: [Object.values(entry)]
+					}
+				});
+			} catch (err) {
+				console.error('Error inserting data: ', err);
+				return res.status(500).json({ message: 'Error Inserting Data', err });
+			}
+		});
+
+		// return res.status(200).json({ message: 'Row Added Successfully', data: data });
+	} catch (err) {
+		console.error('Error: ', err);
+		// throw new Error('ERR_UPDATING', err);
+		return res.status(500).json({ message: 'Interal Server Error', err });
+	}
+}
 
 // Initialise the New Sheet
 
@@ -44,47 +145,6 @@ async function createSheetWithHeaders() {
 		console.log('updated sheet', result);
 	} catch (err) {
 		console.error('Error updating sheet', err);
-	}
-}
-
-async function addNewSignUp(data) {
-	try {
-		let mappedData;
-		if (data) {
-			mappedData = dataMapping.mapDataWithMapping(data);
-			console.log(JSON.stringify(mappedData, null, 2));
-		} else {
-			throw Error('no data');
-		}
-
-		const authClient = await createAuthClient();
-
-		const sheets = google.sheets({ version: 'v4', auth: authClient });
-
-		const response = await sheets.spreadsheets.values.get({
-			spreadsheetId: SPREADSHEET_ID,
-			range: 'A:M'
-		});
-
-		// const valuesToInsert = Object.keys(propertyMapping)
-
-		const lastRow = response.data.values ? response.data.values.length : 0;
-		const range = `sign-ups-test!A${lastRow}`;
-		console.log('LastRow: ', lastRow);
-		// return
-		sheets.spreadsheets.values.append({
-			spreadsheetId: SPREADSHEET_ID,
-			range: range,
-			valueInputOption: 'RAW',
-			insertDataOption: 'INSERT_ROWS',
-			resource: {
-				values: [Object.values(mappedData)]
-			}
-		});
-		return { message: 'Row Added Successfully', data: data };
-	} catch (err) {
-		console.error('Error: ', err);
-		throw new Error('ERR_UPDATING', err);
 	}
 }
 

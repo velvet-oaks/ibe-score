@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const utilities = require('../util/utilities');
 const sheetsController = require('../controllers/googleControllers/sheetsController');
+const directorController = require('../controllers/directorController');
 
 dotenv.config();
 
@@ -21,21 +22,24 @@ const filterKeys = ['firstName', 'lastName'];
 // 	res.json({ data: data, newObj: newObj, keys: keys, nameString: nameString });
 // });
 
-router.post('/', async (req, res) => {
-	// console.log(req.body.data);
-	// return;
-	try {
-		const data = req.body.data;
-		if (data) {
-			const result = await sheetsController.addNewSignUp(data);
-			res.status(200).json({ message: result });
-		} else {
-			throw Error('No req.body.data');
-		}
-	} catch (err) {
-		console.error('Error: ', err);
-		res.status(500).json({ message: 'An error occurred in the route', err });
-	}
-});
+// router.post('/', async (req, res) => {
+// 	console.log('url:', req.originalUrl);
+// 	// console.log(req.body.data);
+// 	// return;
+// 	try {
+// 		const data = req.body;
+// 		console.log('route data: ', JSON.stringify(data, null, 2));
+// 		if (data) {
+// 			const result = await sheetsController.addNewSignUp(req,res);
+// 		} else {
+// 			throw Error('No req.body.data');
+// 		}
+// 	} catch (err) {
+// 		console.error('Error: ', err);
+// 		res.status(500).json({ message: 'An error occurred in the route', err });
+// 	}
+// });
+
+router.post('/', directorController.createDirector);
 
 module.exports = router;

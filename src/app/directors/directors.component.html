@@ -16,21 +16,31 @@
 	<!-- <div class="slotForm emailpass"> -->
 	<mat-card>
 		<h3>Change Email:</h3>
-		<mat-form-field class="example-full-width">
-			<mat-label>Email</mat-label>
-			<input
-				matInput
-				placeholder="New Email"
-				[(ngModel)]="newEmail"
-				value="test@test.com" />
-		</mat-form-field>
-		&nbsp;
-		<button
-			mat-raised-button
-			color="none"
-			(click)="updateEmail()">
-			Save
-		</button>
+		<form [formGroup]="emailUpdateForm">
+			<mat-form-field class="example-full-width">
+				<mat-label>Email</mat-label>
+				<input
+					type="email"
+					matInput
+					placeholder="New Email"
+					[(ngModel)]="newEmail"
+					value="test@test.com" />
+			</mat-form-field>
+			<mat-error
+				*ngIf="
+					emailUpdateForm.controls.newEmail.errors?.required &&
+					emailUpdateForm.controls.newEmail.touched
+				">
+				Email <strong>required</strong>
+			</mat-error>
+			&nbsp;
+			<button
+				mat-flat-button
+				color="none"
+				(click)="updateEmail()">
+				Save
+			</button>
+		</form>
 	</mat-card>
 	<!-- </div> -->
 
@@ -99,7 +109,7 @@
 			</mat-form-field>
 			<br />
 			<button
-				mat-raised-button
+				mat-flat-button
 				color="none"
 				(click)="updatePassword()">
 				Save
@@ -107,5 +117,4 @@
 			<br />
 		</form>
 	</mat-card>
-
 </div>

@@ -40,7 +40,7 @@ export class PasswordResetComponent implements OnInit {
 	requestForm = this.fb.group({
 		email: ['', Validators.required],
 		slot: [''],
-		username: ['']
+		// username: ['']
 	});
 
 	passwordResetForm = this.fb.group({
@@ -76,9 +76,9 @@ export class PasswordResetComponent implements OnInit {
 		if (this.requestForm.valid) {
 			const email = this.requestForm.get('email')?.value;
 			const slot = this.requestForm.get('slot')?.value;
-			const username = this.requestForm.get('username').value
+			// const username = this.requestForm.get('username').value
 			// request reset logic
-			this.authService.requestPassword(email, slot, username).subscribe(response => {
+			this.authService.requestPassword(email, slot).subscribe(response => {
 				console.log('Password requested successfully from front end', response);
 				this.showSuccessDialog();
 			});

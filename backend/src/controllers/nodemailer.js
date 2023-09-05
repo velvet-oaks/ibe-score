@@ -23,11 +23,40 @@ const smtp = {
 	}
 };
 
+async function sendDetails(contact) {
+	try {
+		if (!contact) {
+			console.log('no contact for nodeMail');
+		}
+
+		const transport = nodemail.createTransport(smtp);
+		const template = await readFileAsync(
+			path.join(__dirname, '..', 'email', 'templates', 'updated_email.html'),
+			'utf8'
+		);
+		let mailOptions = {
+			from: smtp.auth.user,
+			to: contact.email,
+			bcc: proceess.env.IBE_ADMIN,
+			subject: `Email Updated for game code ${contact.gameCode}`,
+			html: template
+				.replace('[name]', contact.name)
+				.replace('[slot]', cotact.gameCode)
+				.replace('[email]', contact.email)
+		};
+		const info = await transport.sendMail(mailOptions);
+		return { messageId: info.messageId };
+	} catch (err) {
+		console.error('Error sending mail', err);
+		throw err;
+	}
+}
+
 async function sendNodeMail(contact) {
 	console.log(contact);
 	const transport = nodemailer.createTransport(smtp);
 	const template = await readFileAsync(
-		path.join(__dirname, '..', 'email', 'templates', 'basic_email.html'),
+		path.join(__dirname, '..', 'email', 'templates', 'welcome_email.html'),
 		'utf8'
 	);
 	try {
@@ -35,13 +64,12 @@ async function sendNodeMail(contact) {
 		let mailOptions = {
 			from: smtp.auth.user,
 			to: contact.email,
-			bcc: [process.env.NICOLE, process.env.IBE_ADMIN],
+			bcc: process.env.IBE_ADMIN,
 			subject: 'Welcome to International Bridge Excellence',
 			html: template
-				.replace('[full_name]', contact.full_name)
-				.replace('[username]', contact.user_name)
-				.replace('[slot]', contact.slot)
-				.replace('[password]', contact.password)
+				.replace('[name]', contact.name)
+				.replace('[gameCode]', contact.gameCode)
+				.replace('[dirKey]', contact.directorKey)
 		};
 		const info = await transport.sendMail(mailOptions);
 		return { messageId: info.messageId };
@@ -61,12 +89,12 @@ async function sendNewPass(contact) {
 		// 	'utf8'
 		// );
 
-		const welcomeEmail = await readFileAsync(
-			path.join(__dirname, '..', 'email', 'templates', 'basic_email.html'),
+		const password_email = await readFileAsync(
+			path.join(__dirname, '..', 'email', 'templates', 'test_template.html'),
 			'utf8'
 		);
-		if (welcomeEmail) {
-			console.log('welcomeEmail: ', welcomeEmail);
+		if (password_email) {
+			console.log('welcomeEmail Found: ');
 		} else {
 			console.log('No test_template');
 		}
@@ -74,16 +102,15 @@ async function sendNewPass(contact) {
 		const mailOptions = {
 			from: smtp.auth.user,
 			to: contact.email,
-			bcc: [process.env.NICOLE, process.env.IBE_ADMIN],
-			subject: 'Welcome to IBEScore',
+			bcc: process.env.IBE_ADMIN,
+			subject: 'IBEScore Password Reset Request',
 			// 	html: template
 			// 		.replace('[full_name]', contact.recipientFullName)
 			// 		.replace('[slot]', contact.recipientSlot)
-			html: welcomeEmail
+			html: password_email
 				.replace('{{email}}', contact.email)
 				.replace('{{password}}', contact.newPassword)
 				.replace('{{slot}}', contact.slot)
-				.replace('{{username}}', contact.user_name)
 		};
 		try {
 			const info = await transport.sendMail(mailOptions);
@@ -103,4 +130,4 @@ async function sendNewPass(contact) {
 	}
 }
 
-module.exports = { sendNodeMail, sendNewPass };
+module.exports = { sendNodeMail, sendNewPass, sendDetails };

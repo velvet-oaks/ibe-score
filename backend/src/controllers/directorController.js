@@ -10,6 +10,7 @@ const generateSlot = require('./slotCreation');
 const genPass = require('./generatePassword');
 const sendMail = require('./nodemailer');
 const { error } = require('console');
+const sheetController = require('./googleControllers/sheetsController');
 dotenv.config();
 
 // Keys
@@ -54,18 +55,47 @@ async function checkSlotExists(slot) {
 }
 
 async function createDirector(req, res, next) {
-	console.log(req.body.slot);
-	let slot = '';
-	if (!req.body.slot) {
-		slot = generateSlot();
-	} else slot = req.body.slot;
-	const newSlot = {
-		slot: slot
-	};
-	const password = req.body.password;
+	console.log(req.originalUrl);
+	let fullName;
+	let tempSlot;
+	let password;
+	let tel_phone;
+	let username;
+	if (req.originalUrl === '/ibescore/register') {
+		console.log(req.body.directorKey);
 
-	const oldSlot = req.body.slot ? req.body.slot : newSlot.slot;
-	const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+		fullName = `${req.body.firstName} ${req.body.lastName}`;
+		username = `${req.body.firstName}_${req.body.lastName}`;
+		tempSlot = req.body.gameCode;
+		password = req.body.directorKey;
+		tel_phone = req.body.internationalTelNumber;
+		if (!req.body.gameCode) {
+			tempSlot = generateSlot();
+		}
+	} else {
+		fullName = req.body.full_name;
+		username = req.body.user_name;
+		tempSlot = req.body.slot;
+		password = req.body.password;
+		tel_phone = req.body.tel_phone;
+		if (!req.body.slot) {
+			tempSlot = generateSlot();
+		}
+	}
+	const newSlot = {
+		slot: tempSlot
+	};
+
+	// console.log('tempSlot: ', tempSlot);
+	// console.log('Full Name: ', fullName);
+	// console.log('Username: ', username);
+	// return;
+	console.log(password);
+
+	// const password = req.body.password;
+	const oldSlot = tempSlot ? tempSlot : newSlot.slot;
+	// const oldSlot = req.body.slot ? req.body.slot : newSlot.slot;
+	const hashedPassword = bcrypt.hashSync(password, salt);
 	let victorError = false;
 	try {
 		// Perform a database query to check if the slot exists
@@ -74,16 +104,17 @@ async function createDirector(req, res, next) {
 		});
 
 		if (existingDirector) {
+			const error = new Error('SLOT_EXISTS');
+			error.slot = oldSlot;
 			// Slot already exists, throw an error
-			console.log();
-			throw new Error('SLOT_EXISTS');
+			throw error;
 		} else {
 			try {
 				await sendData(
-					req.body.full_name,
+					fullName,
 					req.body.email,
-					req.body.tel_phone,
-					req.body.slot,
+					tel_phone,
+					tempSlot,
 					req.body.country,
 					req.body.type,
 					hashedPassword
@@ -93,15 +124,14 @@ async function createDirector(req, res, next) {
 			}
 
 			if (victorError) {
-				return res.status(500).json({ message: 'VIC_ERROR', err });
+				return res.status(500).json({ message: 'VIC_ERROR', victorError });
 			} else {
 				// Slot does not exist, proceed with saving the newDirector
 				const mailOptions = {
 					email: req.body.email,
-					slot: req.body.slot,
-					full_name: req.body.full_name,
-					user_name: req.body.user_name,
-					password: password
+					gameCode: tempSlot,
+					name: req.body.firstName ? req.body.firstName : fullName,
+					directorKey: password
 				};
 				if (mailOptions) {
 					const result = await sendMail.sendNodeMail(mailOptions);
@@ -110,23 +140,25 @@ async function createDirector(req, res, next) {
 					console.log('Failed to send welcome email');
 				}
 
+				const userData = {
+					addDate: new Date().getTime(),
+					lastPlayed: req.body.userData?.lastPlayed || '',
+					pp_n: req.body.userData?.pp_n || ''
+				};
+
 				const newDirector = new director({
-					full_name: req.body.full_name,
+					full_name: fullName,
 					user_name: req.body.user_name,
 					type: req.body.type,
 					valid_user: true,
 					email: req.body.email,
-					slot: oldSlot,
+					slot: tempSlot,
 					slots: [newSlot],
-					tel_phone: req.body.tel_phone,
+					tel_phone: tel_phone,
 					password: hashedPassword,
 					salt: salt,
 					country: req.body.country,
-					userData: {
-						addDate: req.body.userData.addDate,
-						lastPlayed: req.body.userData.lastPlayed,
-						pp_n: req.body.userData.pp_n
-					}
+					userData: userData
 				});
 
 				// Save the newDirector to the database
@@ -135,7 +167,7 @@ async function createDirector(req, res, next) {
 				if (!result) {
 					throw new Error('Error saving to the database');
 				} else {
-					console.log('director saved: ', result);
+					// console.log('director saved: ', result);
 					// Generate a JWT token and send it to the front end
 					const jwtBearerToken = jwt.sign({}, decryptedKey, {
 						algorithm: 'RS256',
@@ -153,6 +185,10 @@ async function createDirector(req, res, next) {
 						});
 					}
 
+					if (req.originalUrl === '/ibescore/register') {
+						await addToSheet(req, res);
+					}
+
 					// Respond with success and the JWT token
 					res.status(200).json({
 						message: 'DIRECTOR_CREATED',
@@ -166,9 +202,25 @@ async function createDirector(req, res, next) {
 		}
 	} catch (err) {
 		console.error('Internal Server Error', err);
-		res.status(400).json({ message: 'ERROR', err: err.message, user: null });
+		let errorResponse = {
+			message: 'ERROR',
+			err: err.message,
+			user: null
+		};
+		if (err.slot) {
+			errorResponse.slot = err.slot;
+		}
+		res.status(400).json(errorResponse);
 
 		// If the slot already exists or any other error occurs, send an error response to the front end
+	}
+}
+
+async function addToSheet(req, res) {
+	try {
+		await sheetController.addNewSignUp(req, res);
+	} catch (err) {
+		console.error('Error adding to sheet', err);
 	}
 }
 
@@ -183,7 +235,7 @@ async function sendData(
 ) {
 	console.log('about to send to Victor');
 	const transformedData = `trial\n${fullName}\n${email}\n${telPhone}\n${slot}\n${country}\n${type},${hashedPassword}\n`;
-	console.log(transformedData);
+	// console.log(transformedData);
 	// return;
 
 	try {
@@ -198,6 +250,7 @@ async function sendData(
 		if (result === 'success') {
 			console.log("Success from Victor's Server");
 		} else {
+			// console.log(result);
 			throw new Error('VICTOR_ERROR');
 		}
 		// console.log(response);
@@ -271,14 +324,14 @@ async function sendUpdatedPass(data) {
 	try {
 		console.log('Sending request to Victor with the following data:');
 		console.log('Slot:', data.slot);
-		console.log('Current Password:', data.currentPassword);
+		console.log('Current Password:', process.env.MASTER_PASS);
 		console.log('Hashed New Password:', data.hashedNewPassword);
 
 		const url = process.env.UPDATE_PASS;
-		const string = `${data.slot}\nDIRPASS\n${data.currentPassword}\n${data.hashedNewPassword}`;
+		const string = `${data.slot}\nDIRPASS\n${process.env.MASTER_PASS}\n${data.hashedNewPassword}`;
 		const headers = { 'Content-Type': 'text/plain' };
 
-		console.log('const string is: \n', string);
+		console.log('const string is:\n', string);
 
 		const response = await axios.post(url, string, { headers: headers });
 		let result;
@@ -306,10 +359,11 @@ async function sendUpdatedPass(data) {
 		throw err;
 	}
 }
-async function findContactBuildMailOptions(slot, email, user_name, password) {
+
+async function findContactBuildMailOptions(slot, email, password) {
 	console.log('findContactBuildMailOptions() called');
 	try {
-		const contactDetails = await director.findOne({ slot, user_name });
+		const contactDetails = await director.findOne({ slot, email });
 
 		if (contactDetails) {
 			console.log('contactDetails: ', contactDetails);
@@ -321,7 +375,6 @@ async function findContactBuildMailOptions(slot, email, user_name, password) {
 					email: contactDetails.email,
 
 					fullName: contactDetails.full_name,
-					user_name: user_name,
 					slot: contactDetails.slot,
 					newPassword: password
 				};
@@ -338,19 +391,27 @@ async function findContactBuildMailOptions(slot, email, user_name, password) {
 	}
 }
 
-async function updateDatabase(slot, user_name, hashedNewPassword) {
+async function updateDatabase(slot, email, hashedNewPassword) {
 	try {
-		updatedDirector = await director.findOneAndUpdate(
-			{ slot: slot },
-			{ user_name: user_name },
-			{ $set: { password: hashedNewPassword } }
-		);
-		if (!updatedDirector) {
+		console.log('password to update: ', hashedNewPassword);
+
+		const dirToUpdate = await director.findOne({ slot: slot, email: email });
+		dirToUpdate.password = hashedNewPassword;
+
+		if (!dirToUpdate) {
 			throw new Error('DIR_NOT_FOUND');
 		}
+
+		await dirToUpdate.save();
+		console.log('password updated successfully');
+		return dirToUpdate;
+		// const updatedDirector = await director.findOneAndUpdate(
+		// 	{ slot: slot },
+		// 	{ email: email },
+		// 	{ $set: { password: hashedNewPassword } },
+		// 	{ new: true }
+		// );
 		// Password update successful
-		// Any other logic related to successful update can be added here
-		return updatedDirector; // Optionally, return the updatedDirector if needed
 	} catch (err) {
 		console.error('Failed to update database', err);
 		throw err; // Re-throw the error to be handled by the calling code
@@ -358,27 +419,21 @@ async function updateDatabase(slot, user_name, hashedNewPassword) {
 }
 
 async function handlePassReq(req, res) {
-	const slot = req.query.SLOT;
-	const { email, user_name } = req.body;
-	const password = genPass();
-	const hashedNewPassword = bcrypt.hashSync(password, salt);
-	console.log('generated password', password);
-	console.log('hashedNewPassword', hashedNewPassword);
-	const data = {
-		slot: slot,
-		hashedNewPassword: hashedNewPassword
-	};
-	console.log('data is: ', data);
-	// return
-	let updatedDirector;
-
 	try {
-		const mailOptions = await findContactBuildMailOptions(
-			slot,
-			email,
-			user_name,
-			password
-		);
+		const slot = req.query.SLOT;
+		const { email } = req.body;
+		const password = genPass();
+		const hashedNewPassword = bcrypt.hashSync(password, salt);
+		console.log('generated password', password);
+		console.log('hashedNewPassword', hashedNewPassword);
+		const data = {
+			slot: slot,
+			hashedNewPassword: hashedNewPassword
+		};
+		console.log('data is: ', data);
+		// return
+		let updatedDirector;
+		const mailOptions = await findContactBuildMailOptions(slot, email, password);
 		const victorData = {
 			slot: slot,
 			currentPassword: process.env.MASTER_PASS,
@@ -386,7 +441,7 @@ async function handlePassReq(req, res) {
 		};
 
 		if (mailOptions) {
-			console.log(mailOptions);
+			// console.log(mailOptions);
 			const result = await sendMail.sendNewPass(mailOptions);
 
 			console.log(result);
@@ -400,7 +455,9 @@ async function handlePassReq(req, res) {
 				.status(500)
 				.json({ message: result.message, err: result.errorCode });
 		}
-		await updateDatabase(slot, user_name, hashedNewPassword);
+		const updatedDir = await updateDatabase(slot, email, hashedNewPassword);
+
+		console.log('from calling function, updatedDir: ', updatedDir);
 
 		// console.log(mailOptions, success);
 		// Upon total success
@@ -533,5 +590,6 @@ async function handlePassReq(req, res) {
 module.exports = {
 	createDirector,
 	updatePassword,
-	handlePassReq
+	handlePassReq,
+	addToSheet
 };

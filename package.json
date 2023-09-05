@@ -47,7 +47,7 @@
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^15.1.4",
-		"@angular/cli": "~15.1.4",
+		"@angular/cli": "^15.2.9",
 		"@angular/compiler-cli": "^15.1.0",
 		"@types/bcryptjs": "^2.4.2",
 		"@types/jasmine": "~4.3.0",

@@ -12,6 +12,7 @@ const generateSlot = require('../controllers/slotCreation');
 const errorResponse = require('../controllers/errorResponse');
 const userAuth = require('../controllers/userAuth.controller');
 const directorController = require('../controllers/directorController');
+const mailController = require('../controllers/nodemailer');
 
 dotenv.config();
 
@@ -105,27 +106,53 @@ router.post('/check-username', (req, res, next) => {
 });
 
 // Update email route
-router.put('/update-email', (req, res) => {
-	const { directorId, email } = req.body;
+router.put('/update-email', async (req, res) => {
+	const { directorId, newEmail } = req.body;
 
-	user
-		.findByIdAndUpdate(directorId, { email }, { new: true })
-		.then(updatedDirector => {
-			if (!updatedDirector) {
-				return res.status(404).json({ message: 'User not found' });
-			}
+	try {
+		const updatedDirector = await director.findByIdAndUpdate(
+			directorId,
+			{ email: newEmail },
+			{ new: true }
+		);
+		if (!updatedDirector) {
+			return res.status(404).json({ message: 'No Director Found' });
+		}
 
-			const config = {
-				method
-			};
-			res
-				.status(200)
-				.json({ message: 'Email updated successfully', user: updatedDirector });
-		})
-		.catch(error => {
-			res.status(500).json({ message: 'Failed to update email', error });
-		});
+		const mailOptions = await findContactBuildMailOptions(directorId);
+		const email = await mailController.sendDetails(mailOptions);
+		if (!email) {
+			console.log()
+		}
+
+		return res
+			.status(200)
+			.json({ message: 'Email updated Successfully', updatedDirector });
+	} catch (err) {
+		console.error('Error Updating Email', err);
+		return res.status(500).json({ message: 'Internal Server Error', Error: err });
+	}
 });
+
+async function findContactBuildMailOptions(id) {
+	try {
+		const contactDetails = await director.findById(id);
+		if (!contactDetails) {
+			throw new Error('No contact details found whilst constructing mailOptions');
+		} else {
+			const mailOptions = {
+				email: contactDetails.email,
+				name: contactDetails.full_name,
+				gameCode: contactDetails.slot
+			};
+			console.log('Mail Options: ', mailOptions);
+			return mailOptions;
+		}
+	} catch (err) {
+		console.error('Internal Server Error', err);
+		throw err;
+	}
+}
 
 // Update password route
 

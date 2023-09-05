@@ -34,7 +34,7 @@ async function readCredentials(path) {
 	try {
 		const credentials = await fs.readFile(path);
 		const keys = JSON.parse(credentials);
-		console.log(keys);
+		// console.log(keys)
 		return keys;
 	} catch (err) {
 		console.error(err);

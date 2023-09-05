@@ -24,24 +24,24 @@ const originArray = [process.env.ORIGIN, localHost];
 
 console.log(`allowedOrigin/s are: ${allowedOrigin} & ${localHost}`);
 
-app.use((req, res, next) => {
-	const actualOrigin = req.headers.origin;
-	if (originArray.includes(actualOrigin)) {
-		res.setHeader('Access-Control-Allow-Origin', actualOrigin);
-	} else {
-		return res.status(403).send('Unauthorized Origin');
-	}
-	res.setHeader(
-		'Access-Control-Allow-Methods',
-		'GET,POST,PATCH,DELETE,OPTIONS,PUT'
-	);
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-	if (req.method === 'OPTIONS') {
-		res.sendStatus(200);
-	} else {
-		next();
-	}
-});
+// app.use((req, res, next) => {
+// 	const actualOrigin = req.headers.origin;
+// 	if (originArray.includes(actualOrigin)) {
+// 		res.setHeader('Access-Control-Allow-Origin', actualOrigin);
+// 	} else {
+// 		return res.status(403).send('Unauthorized Origin');
+// 	}
+// 	res.setHeader(
+// 		'Access-Control-Allow-Methods',
+// 		'GET,POST,PATCH,DELETE,OPTIONS,PUT'
+// 	);
+// 	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// 	if (req.method === 'OPTIONS') {
+// 		res.sendStatus(200);
+// 	} else {
+// 		next();
+// 	}
+// });
 
 // app.use((req, res, next) => {
 // 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -57,6 +57,19 @@ app.use((req, res, next) => {
 // 		next();
 // 	}
 // });
+
+const corsOptions = {
+	optionsSuccessStatus: 200,
+	origin: function (origin, callback) {
+		if (originArray.includes(origin) || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('unauthorized Origin'));
+		}
+	}
+};
+
+app.use(cors(corsOptions));
 
 //Import Routes
 // const authRoute = require('./src/routes/auth');

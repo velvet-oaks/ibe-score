@@ -306,8 +306,8 @@ export class AuthService {
 		await this.http
 			.post<{ message: String; err: any; user: any }>(
 				environment.API_URL + '/auth',
-				newUser,
-				{ withCredentials: true }
+				newUser
+				// { withCredentials: true }
 			)
 			.subscribe(responseData => {
 				if (responseData.err) {
@@ -341,12 +341,22 @@ export class AuthService {
 	// 	this.directorId = directorId;
 	// }
 
-	updateEmail(directorId: string, newEmail: string): Observable<any> {
-		const url = environment.API_URL + '/auth/update-email';
-		const body = { email: newEmail };
-
-		return this.http.put<any>(url, body);
+	public updateEmail(id: string, email: string): Observable<any> {
+		return this.http.put<{ message: string; err: any; updatedUser: any }>(
+			`${environment.API_URL}/auth/update-email`,
+			{
+				directorId: id,
+				newEmail: email
+			}
+		);
 	}
+
+	// updateEmail(directorId: string, newEmail: string): Observable<any> {
+	// 	const url = environment.API_URL + '/auth/update-email';
+	// 	const body = { directorId: this.directorId$, email: newEmail };
+
+	// 	return this.http.put<{response: Response}>(url, body);
+	// }
 
 	updatePassword(currentPassword: string, newPassword: string): Observable<any> {
 		const directorId = this.idSubject.getValue();
@@ -363,13 +373,12 @@ export class AuthService {
 		return this.http.put<any>(url, body);
 	}
 
-	requestPassword(email: string, slot: string, username: string): Observable<any> {
+	requestPassword(email: string, slot: string): Observable<any> {
 		const directorId = this.idSubject.getValue();
 
 		const url = `${environment.API_URL}/auth/request-password?SLOT=${slot}`;
 		const body = {
-			email: email,
-			user_name: username
+			email: email
 		};
 
 		return this.http.post<any>(url, body);

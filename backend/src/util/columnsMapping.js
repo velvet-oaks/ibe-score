@@ -27,7 +27,7 @@ const keys = [
 	'type',
 	'email',
 	'internationalTelNumber',
-	'directorKey',
+	'password',
 	'gameCode',
 	'country',
 	'city',
@@ -37,6 +37,24 @@ const keys = [
 	'comments'
 ];
 
+// function newReadableMapping(data) {
+// 	return {
+// 		'First Name': data.firstName,
+// 	'Last Name': data.lastName,
+// 	'Subscription Type': data.type,
+// 	'Email': data.email,
+// 	'Telephone Number': data.internationalTelNumber,
+// 	'Director Key': data.directorKey,
+// 	'Game Code': data.,
+// 	'Country': 'H',
+// 	'City': 'I',
+// 	'Usage': 'J',
+// 	'How did they hear': 'K',
+// 	'Feedback Choice': 'L',
+// 	'Any comments': 'M'
+// 	}
+// }
+
 function mapDataWithMapping(data) {
 	const mappedDataObject = {};
 	const propertyMapping = {
@@ -45,7 +63,7 @@ function mapDataWithMapping(data) {
 		type: 'Subscription Type',
 		email: 'Email',
 		internationalTelNumber: 'Telephone Number',
-		directorKey: 'Director Key',
+		password: 'Director Key',
 		gameCode: 'Game Code',
 		country: 'Country',
 		city: 'City',
@@ -62,10 +80,17 @@ function mapDataWithMapping(data) {
 	return mappedDataObject;
 }
 
+function mapToArray(mappedData) {
+	return Object.keys(mappedData).map(key => ({
+		[key]: mappedData[key]
+	}));
+}
+
 // const humanReadableKeys = mapPropertyNamesToColumnNames(keys);
 // console.log(humanReadableKeys);
 
 module.exports = {
 	mapDataWithMapping,
-	mapPropertyNamesToColumnNames
+	mapPropertyNamesToColumnNames,
+	mapToArray
 };

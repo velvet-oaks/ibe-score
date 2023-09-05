@@ -9,7 +9,7 @@ const userData = mongoose.Schema({
 const directorSchema = mongoose.Schema(
 	{
 		full_name: { type: String, required: true },
-		user_name: { type: String, required: true },
+		user_name: { type: String, required: false },
 		type: { type: String, required: true },
 		valid_user: { type: Boolean, required: false },
 		email: { type: String, required: true, match: /.+\@.+\..+/ }, // Ive removed the unique just for testing

@@ -18,6 +18,7 @@ import { Observable, Subject } from 'rxjs';
 export class ToolbarComponent {
 	slot: string;
 	username: string;
+	directorId: string;
 	private destroy$ = new Subject<void>();
 	@ViewChild('drawer') drawer: MatDrawer;
 
@@ -57,6 +58,16 @@ export class ToolbarComponent {
 				this.slot = slot;
 			}
 		});
+
+		this.authService.directorId$.subscribe(id => {
+			console.log('Director Id is :', id);
+			if (id === 'udnefined' || null) {
+				console.log('No Id found');
+				this.directorId = 'no ID found';
+			} else {
+				this.directorId = id;
+			}
+		});
 	}
 
 	openForgotPassword(): void {
@@ -70,7 +81,7 @@ export class ToolbarComponent {
 	}
 
 	openDialog(type: any): void {
-		const width= type === 'signUp' ? '400px' : undefined
+		const width = type === 'signUp' ? '400px' : undefined;
 		const dialogRef = this.dialog.open(LoginSignupDialogComponent, {
 			data: { type: type },
 			width: width

@@ -7,10 +7,15 @@ import {
 	AbstractControl,
 	FormBuilder,
 	Validators,
+	ValidatorFn,
 	FormControl,
 	FormGroupDirective,
-	NgForm
+	NgForm,
+	FormGroup
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 	isErrorState(
@@ -38,24 +43,31 @@ export class DirectorsComponent implements OnInit {
 	directorId: string = '';
 	generatedSlot: String = '';
 	hide = true;
-	passwordUpdateForm = this.fb.group({
-		currentPassword: ['', Validators.required],
-		newPassword: ['', [Validators.required, Validators.minLength(4)]],
-		repeatPassword: ['', Validators.required]
-	});
+	public emailUpdateForm: FormGroup;
+	public passwordUpdateForm: FormGroup;
 	matcher: MyErrorStateMatcher;
 
 	constructor(
 		private authService: AuthService,
 		private snackBar: MatSnackBar,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private dialog: MatDialog
 	) {
 		this.matcher = new MyErrorStateMatcher();
+		this.emailUpdateForm = this.fb.group({
+			newEmail: new FormControl('', [Validators.required, Validators.email])
+		});
+		this.passwordUpdateForm = this.fb.group({
+			currentPassword: ['', Validators.required],
+			newPassword: ['', [Validators.required, Validators.minLength(4)]],
+			repeatPassword: ['', Validators.required]
+		});
 	}
 
 	ngOnInit(): void {
 		this.authService.directorId$.subscribe(directorId => {
 			this.directorId = directorId;
+			console.log('In director component, director Id: ', this.directorId);
 		});
 
 		this.passwordUpdateForm = this.fb.group({
@@ -110,18 +122,43 @@ export class DirectorsComponent implements OnInit {
 		);
 	}
 
-	updateEmail(): void {
-		// Call the updateEmail method of the AuthService
-		this.authService.updateEmail(this.directorId, this.newEmail).subscribe(
-			response => {
-				// Handle the response if needed
-				console.log('Email updated successfully:', response);
-			},
-			error => {
-				// Handle the error if needed
-				console.log('Error updating email:', error);
+	confirmAction(email: any) {
+		const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+			width: '400px',
+			data: {
+				email: email
 			}
-		);
+		});
+	}
+
+	updateEmail() {
+		const newEmail = this.newEmail;
+
+		// return;
+		// Call the updateEmail method of the AuthService
+		this.authService.updateEmail(this.directorId, newEmail).subscribe({
+			next: response => {
+				console.log('email updated', response);
+
+				const email = response.updatedDirector.email;
+				this.confirmAction(email);
+			},
+			error: error => {
+				this.handleEmailUpdateError(error);
+				// console.log('error', error?.message);
+			}
+		});
+	}
+
+	private handleEmailUpdateError(error: any) {
+		if (error instanceof HttpErrorResponse) {
+			console.error('HTTP Error Status: ', error.status);
+			console.error('HTTP Error Message: ', error.error);
+		} else if (error instanceof Error) {
+			console.error('JS Error: ', error.message);
+		} else {
+			console.error('Error updating Email: ', error.toString());
+		}
 	}
 
 	// updatePassword(): void {

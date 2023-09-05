@@ -43,6 +43,7 @@ import { DirectorsModule } from './directors/directors.module';
 import { PasswordResetComponent } from './directors/password-reset/password-reset.component';
 import { ExtendedSignupComponent } from './extended-signup/extended-signup.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
 	declarations: [
@@ -69,7 +70,8 @@ import { RegistrationComponent } from './registration/registration.component';
 		SuccessDialogComponent,
 		PasswordResetComponent,
 		ExtendedSignupComponent,
-		RegistrationComponent
+		RegistrationComponent,
+  ConfirmationDialogComponent
 	],
 	imports: [
 		BrowserModule,
