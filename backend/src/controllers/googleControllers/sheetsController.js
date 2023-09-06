@@ -13,7 +13,7 @@ const keys = [
 	'type',
 	'email',
 	'internationalTelNumber',
-	'password',
+	'directorKey',
 	'gameCode',
 	'country',
 	'city',
@@ -64,6 +64,9 @@ async function addNewSignUp(req, res, next) {
 		} else {
 			data = { ...req.body };
 			data.time = new Date().toLocaleString();
+			const tel = `'${data.internationalTelNumber}`;
+
+			data.internationalTelNumber = tel;
 		}
 
 		let mappedData;
